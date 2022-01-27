@@ -6,6 +6,10 @@ import PlayState from'./states/play.js'
 import CompleteState from'./states/complete.js'
 import OverState from'./states/over.js'
 
+import Map from './map.js'
+import HUD from './hud.js'
+import GameStats from './gameStats.js'
+
 
 
 
@@ -18,12 +22,11 @@ const config = {
         default: 'arcade',
 			arcade: {
                 gravity: { y: 0 },
-                debug: false
+                debug: true
             }
     },
-    scene: [MenuState, LevelState, CompleteState, PlayState, OverState]
+    scene: [MenuState, LevelState, CompleteState, PlayState, OverState, Map, HUD, GameStats]
 };
 
 
 const game = new Phaser.Game(config);
-

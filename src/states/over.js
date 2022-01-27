@@ -33,6 +33,11 @@ class OverState extends Phaser.Scene
       
     create ()
     {
+		this.scene.stop('gameStats')
+		this.scene.stop('hud')
+		this.scene.stop('map')
+		
+		
 		var container = this.add.container(400, 300)	
 
       	tile = this.add.tileSprite(0 , 0, 800, 600, 'over')
