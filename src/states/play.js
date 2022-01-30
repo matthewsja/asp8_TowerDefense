@@ -15,6 +15,7 @@ class PlayingState extends Phaser.Scene
     create ()
     {
 		this.scene.launch('map')
+		this.scene.launch('mapLogic')
 		this.scene.launch('hud')	
 		this.scene.launch('gameStats')
     }

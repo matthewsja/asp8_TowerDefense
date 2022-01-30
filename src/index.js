@@ -7,6 +7,7 @@ import CompleteState from'./states/complete.js'
 import OverState from'./states/over.js'
 
 import Map from './map.js'
+import MapLogic from './mapLogic.js'
 import HUD from './hud.js'
 import GameStats from './gameStats.js'
 
@@ -25,7 +26,7 @@ const config = {
                 debug: true
             }
     },
-    scene: [MenuState, LevelState, CompleteState, PlayState, OverState, Map, HUD, GameStats]
+    scene: [MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, GameStats]
 };
 
 
