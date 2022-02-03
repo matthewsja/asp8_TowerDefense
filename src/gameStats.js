@@ -6,9 +6,6 @@ class GameStats extends Phaser.Scene
         super('gameStats');
 		Phaser.Scene.call(this,{key: 'gameStats'})
 
-		this.lives
-		this.score
-		this.money
     }
 
     preload ()
@@ -20,6 +17,8 @@ class GameStats extends Phaser.Scene
 		this.lives = 20
 		this.money = 0
 		this.monsters = 10
+		this.score = 0
+		this.speedSetting = 1
     }
 	
 	update()

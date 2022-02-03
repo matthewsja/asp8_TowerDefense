@@ -19,17 +19,18 @@ class Enemy extends Phaser.GameObjects.PathFollower
 //this is used to fillow the specified path
 	follow(self){
 		self.startFollow({
-				duration: 2000,
+				positionOnPath: true,
+				duration: enemy.pathLength/1,
 				yoyo: false,
 				repeat: 0,
 				rotateToPath: false,
-				verticalAdjust: false,
-    		});
+				verticalAdjust: false
+		});
 	}
 
 //this is used to remove the enemy when its hp is 0
 	destroyEnemy(self){
-		console.log('enemy ' + self.key + ' destroyed')
+		console.log('enemy defeated')
 		self.destroy()
 	}
 

@@ -1,9 +1,16 @@
-//images that when clicked on changes scene
 import one from './assets/1.png'
 import two from './assets/2.png'
 import three from './assets/3.png'
 import four from './assets/4.png'
 import five from './assets/5.png'
+
+import red from './assets/red_square.png'
+import green from './assets/green_square.png'
+import blue from './assets/blue_square.png'
+
+import cross from './assets/x.png'
+
+import circle from './assets/circle.png'
 
 class HUD extends Phaser.Scene
 {
@@ -12,66 +19,52 @@ class HUD extends Phaser.Scene
 //the scene changes to this one when this keyword is used
         super('hud');
 		Phaser.Scene.call(this,{key: 'hud'})
-		
-		//buttons for scene changes
-		this.one1;
-		this.two2;
-		this.three3;
-		this.four4;
-		this.five5;
     }
 
     preload ()
     {
-
-//scene change images
 		this.load.image('one', one)
 		this.load.image('two', two)
 		this.load.image('three', three)
 		this.load.image('four', four)
 		this.load.image('five', five)
+		
+		this.load.image('red', red)
+		this.load.image('green', green)
+		this.load.image('blue', blue)
+		
+		this.load.image('cross', cross)
+		
+		this.load.image('circle', circle)
     }
       
     create ()
     {
-//make the buttons that change scenes
-		this.one1 = this.add.image(50, 50, 'one').setInteractive()
-		this.two2 = this.add.image(150, 50, 'two').setInteractive()
-		this.three3 = this.add.image(250, 50, 'three').setInteractive()
-		this.four4 = this.add.image(350, 50, 'four').setInteractive()
-		this.five5 = this.add.image(450, 50, 'five').setInteractive()
-	
-//make the scene change buttons do as required
-		this.one1.on('pointerdown', function () {
-			console.log('change states1')
-			this.scene.scene.start('menuState')
-		})
+		var hud = this.scene.get('hud')
+		var hudLogic = this.scene.get('hudLogic')
+		var map = this.scene.get('map')
+		var mapLogic = this.scene.get('mapLogic')
 		
-		this.two2.on('pointerdown', function () {
-			console.log('change states2')
-			this.scene.scene.start('levelState')
-
-		})
-		
-		this.three3.on('pointerdown', function () {
-			console.log('change states3')
-			this.scene.scene.start('playingState')
+		this.circle = this.add.image(750, 50, 'circle').setInteractive()
 			
+		this.circle.on('pointerdown', function(){
+			hudLogic.makeSettings()
 		})
 		
-		this.four4.on('pointerdown', function () {
-			console.log('change states4')
-			this.scene.scene.start('completeState')
-		})
+		this.speedButton  = this.add.image(50, 550, 'one').setInteractive()
 		
-		this.five5.on('pointerdown', function () {
-			console.log('change states5')
-			this.scene.scene.start('overState')
+		this.speedButton.on('pointerdown', function(){
+			hudLogic.changeSpeed()
+			mapLogic.updateSpeed()
 		})
+
     }
 	
 	update()
 	{	
+		var hudLogic = this.scene.get('hudLogic')
+		
+		
 	}
 }
 

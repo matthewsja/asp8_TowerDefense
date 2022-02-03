@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import Resources from './resources.js'
+
 import MenuState from './states/menu.js';
 import LevelState from './states/level.js';
 import PlayState from'./states/play.js'
@@ -9,6 +11,7 @@ import OverState from'./states/over.js'
 import Map from './map.js'
 import MapLogic from './mapLogic.js'
 import HUD from './hud.js'
+import HUDLogic from './hudLogic.js'
 import GameStats from './gameStats.js'
 
 
@@ -26,7 +29,7 @@ const config = {
                 debug: true
             }
     },
-    scene: [MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, GameStats]
+    scene: [MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, HUDLogic, GameStats, Resources]
 };
 
 
