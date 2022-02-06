@@ -14,18 +14,26 @@ class GameStats extends Phaser.Scene
       
     create ()
     {
-		this.lives = 20
-		this.money = 0
-		this.monsters = 10
-		this.score = 0
-		this.speedSetting = 1
+	
+		var gameStats = this.scene.get('gameStats')
+		
+		this.startParams = function(params){
+			gameStats.lives = params['lives']
+			gameStats.money = params['money']
+			gameStats.monsters = params['monsters']
+			gameStats.score = params['score']
+			gameStats.speedSetting = params['speedSetting']
+			gameStats.isPlaying = params['isPlaying']
+		}
+		
     }
 	
 	update()
 	{	
 // this allows getting public attributes from the 'map' scene
 		var map = this.scene.get('map')
-
+		var gameStats = this.scene.get('gameStats')
+		
 // in the case that the value of lives reaches 0, the scene will change to the 'game over' scene
 		function gameOver(lives, target){
 			if(lives <= 0){
@@ -47,8 +55,15 @@ class GameStats extends Phaser.Scene
 		}
 
 //this calls the function
-		levelComplete(this.monsters, map.numEnemies, this)		
+		levelComplete(this.monsters, map.numEnemies, this)	
+		
+		gameStats.playSpeed = gameStats.speedSetting * gameStats.isPlaying
 	}
+	
+	
+	
+	
+	
 }
 
 export default GameStats

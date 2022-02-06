@@ -15,8 +15,6 @@ import HUDLogic from './hudLogic.js'
 import GameStats from './gameStats.js'
 
 
-
-
 const config = {
     type: Phaser.scene,
     parent: 'phaser-example',

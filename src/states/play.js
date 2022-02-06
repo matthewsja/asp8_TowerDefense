@@ -1,6 +1,8 @@
 //background image repeated
 import grassTile from '../assets/grass.png';
 
+
+
 class PlayingState extends Phaser.Scene
 {
 	constructor ()
@@ -15,6 +17,8 @@ class PlayingState extends Phaser.Scene
     {
 		//background image
         this.load.image('grass', grassTile);
+		
+
     }
       
     create ()

@@ -17,7 +17,7 @@ constructor ()
       
     create ()
     {
-		var map = this.scene.get('map')
+//		var map = this.scene.get('map')
     }
 	
 	update()
@@ -38,8 +38,6 @@ constructor ()
 			else{
 //remove the previous instance of the destination tile
 
-
-				
 				mapLogic.removePrev(map.origin)
 				mapLogic.removePrev(map.tileGroup)
 				mapLogic.removePrev(map.dest)
@@ -50,6 +48,8 @@ constructor ()
 				for(var i = 0; i < pathList.length; i ++){
 					if(i == 0){
 						map.origin = map.add.image(pathList[i][0], pathList[i][1], 'originTile')
+						map.origin.state = null
+						map.origin.quant = 0
 						map.curve = new Phaser.Curves.Path(pathList[i][0], pathList[i][1]);
 						map.tileGroup = map.add.group()
 					}
@@ -97,7 +97,7 @@ constructor ()
 			enemy.displayHeight = enemy.size[1]
 			enemy.pathLength = map.curve.getLength()
 			enemy.speedMaster = key['speed']
-			enemy.speed = enemy.speedMaster * gameStats.speedSetting
+			enemy.speed = enemy.speedMaster * gameStats.playSpeed
 			enemy.progress = 0
 			enemy.progressPercent = 0
 			enemy.maxHP = key['hp']
@@ -185,7 +185,7 @@ constructor ()
 			bullet.displayWidth = size[0];
 			bullet.displayHeight = size[1];
 			bullet.speedMaster = key['speed']
-			bullet.speed = bullet.speedMaster * gameStats.speedSetting
+			bullet.speed = bullet.speedMaster * gameStats.playSpeed
 			bullet.damageType = key['damageType']
 			bullet.damage = key['damage']
 			bullet.AOE = key['AOE']
@@ -213,14 +213,14 @@ constructor ()
 
 //make the building site image object that would show when building site is empty
 //also hold the coordinates of this building site so could be refered to when building a tower
-			var site = new Phaser.GameObjects.Image(map, coordinates[0], coordinates[1], 'site')
+			var site = new Phaser.GameObjects.Image(map, coordinates[0], coordinates[1], 'site').setInteractive()
 
 
 //name of the object so it may be referenced from the container
 			site.name = 'site'
 			
-//this allows the image to b clicked on
-			site.setInteractive()
+
+
 //this adds the image to the inner container
 			container.add(site, map)
 			
@@ -264,9 +264,9 @@ constructor ()
 			tower.id = key['id']
 			tower.range = key['range']
 			tower.speedMaster = key['speed']
-			tower.speed = tower.speedMaster * gameStats.speedSetting
+			tower.speed = tower.speedMaster * gameStats.playSpeed
 			tower.bulletKey = key['bulletKey']
-			
+			tower.upgradeKey = key['upgradeKey']
 
 //enable physics for the tower so it may detect enemies
 			map.physics.world.enable(tower);
@@ -309,6 +309,7 @@ constructor ()
 				enemy.destroy()
 				gameStats.money += enemy.value
 				console.log('money: ' + gameStats.money)
+				gameStats.score += enemy.value
 			}
 		}
 
@@ -327,7 +328,6 @@ constructor ()
 			var tower = site.getByName('tower')
 			if(tower != null){
 //if there is a tower and if its state is 'firing', immediately change it to 'reload' then after a time, call the function to make it 'ready'
-//				tower.speed = tower.speedMaster * gameStats.speedSetting
 				if(tower.state == 'firing'){
 					tower.state = 'reload'
 					map.time.delayedCall(1000/tower.speed, mapLogic.towerReload, [tower], map)
@@ -353,24 +353,70 @@ constructor ()
 		
 		this.enemyProgress = function(enemy){
 			enemy.pathTween.timeScale = enemy.speed
+
 		}
 		
 		this.updateSpeed = function(){
 			map.bulletGroup.getChildren().forEach(function(bullet){
-				bullet.speed = bullet.speedMaster * gameStats.speedSetting
+				bullet.speed = bullet.speedMaster * gameStats.playSpeed
 			})
 			
 			map.enemyGroup.getChildren().forEach(function(enemy){
-				enemy.speed = enemy.speedMaster * gameStats.speedSetting
+				enemy.speed = enemy.speedMaster * gameStats.playSpeed
 				enemy.pathTween.timeScale = enemy.speed
 
 			})
 			map.siteContainer.each(function(site){
 				if(site.getByName('tower') != null){
 					var tower = site.getByName('tower')
-					tower.speed = tower.speedMaster * gameStats.speedSetting
+					tower.speed = tower.speedMaster * gameStats.playSpeed
 				}
 			})
+		}
+		
+		
+		
+		this.waveMake = function(){
+			var origin = map.origin
+			if(origin.state == 'creating'){
+				console.log(origin.state)
+				mapLogic.makeEnemy(origin.enemy)
+				origin.state = 'created'
+				origin.created++
+			}
+		}
+		
+		this.waveSpeed = function(){
+			var origin = map.origin
+			if(origin.created < origin.quant){
+				if(origin.state == 'created'){
+					origin.state = 'rest'
+					map.time.delayedCall(1000/origin.speed,mapLogic.waveReload,[],map)
+				}
+			}
+			if(origin.created >= origin.quant){
+				console.log('wave finished')
+			}
+		}
+		
+		this.waveReload = function(){
+			
+			map.origin.state = 'creating'
+		}
+		
+		this.makeWave = function(data){
+			console.log(data)
+			var enemy = eval(data[0])
+			var rate = data[1]
+			var quant = data[2]
+			var origin = map.origin
+			
+			origin.quant = quant
+			origin.created = 0
+			origin.speedMaster = rate
+			origin.speed = origin.speedMaster * gameStats.playSpeed
+			origin.state = 'creating'
+			origin.enemy = enemy
 		}
 	}
 }

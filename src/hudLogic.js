@@ -24,7 +24,18 @@ class HUDLogic extends Phaser.Scene
 
 
 		this.makeSettings = function(){
+			mapLogic.removePrev(hud.rec)
+			mapLogic.removePrev(hud.towerMenu)
 			mapLogic.removePrev(hud.settings)
+			
+			gameStats.isPlaying = false
+			map.siteContainer.each(function(container){
+				container.getByName('site').disableInteractive()
+			})
+			hud.speedButton.disableInteractive()
+			var rec = new Phaser.GameObjects.Rectangle(hud, -100, -100, 2000, 2000, '0xAA7878', 0.5)
+			hud.rec = hud.add.existing(rec)
+			
 			var settings = new Phaser.GameObjects.Container(hud, 400, 300)
 
 			hud.settings = hud.add.existing(settings)
@@ -33,56 +44,47 @@ class HUDLogic extends Phaser.Scene
 			red.displayWidth = 600
 			red.displayHeight = 400
 			settings.add(red, hud)
-
-			var cross = new Phaser.GameObjects.Image(hud, 250, -150, 'cross').setInteractive()
-			cross.displayWidth = 100
-			cross.displayHeight = 100
-			settings.add(cross, hud)
 			
-			cross.on('pointerdown', function(){
-				hud.settings.destroy()
+			var resume = new Phaser.GameObjects.Image(hud, 0, -140, 'resume').setInteractive()
+			settings.add(resume, hud)
+			
+			resume.displayWidth = 200
+			resume.displayHeight = 100
+			
+			var restart = new Phaser.GameObjects.Image(hud, 0, -30, 'restart').setInteractive()
+			settings.add(restart, hud)
+			
+			restart.displayWidth = 200
+			restart.displayHeight = 100
+			
+			var menu = new Phaser.GameObjects.Image(hud, 0, 80, 'menu').setInteractive()
+			settings.add(menu, hud)
+			
+			menu.displayWidth = 200
+			menu.displayHeight = 100
+			
+			resume.on('pointerdown', function(){
+				gameStats.isPlaying = true
+				
+				map.siteContainer.each(function(container){
+					container.getByName('site').setInteractive()
+				})
+				hud.speedButton.setInteractive()
+				rec.destroy()
+				
+				settings.destroy()
+			})
+
+			restart.on('pointerdown', function () {
+				console.log('change states3')
+				this.scene.scene.start('playingState')
 			})
 			
-			var one = new Phaser.GameObjects.Image(hud, -250, -150, 'one').setInteractive()
-			settings.add(one, hud)
-			
-			var two = new Phaser.GameObjects.Image(hud, -150, -150, 'two').setInteractive()
-			settings.add(two, hud)
-			
-			var three = new Phaser.GameObjects.Image(hud, -50, -150, 'three').setInteractive()
-			settings.add(three, hud)
-			
-			var four = new Phaser.GameObjects.Image(hud, 50, -150, 'four').setInteractive()
-			settings.add(four, hud)
-			
-			var five = new Phaser.GameObjects.Image(hud, 150, -150, 'five').setInteractive()
-			settings.add(five, hud)			
-			
-			
-			one.on('pointerdown', function () {
+			menu.on('pointerdown', function () {
 				console.log('change states1')
 				this.scene.scene.start('menuState')
 			})
 
-			two.on('pointerdown', function () {
-				console.log('change states2')
-				this.scene.scene.start('levelState')
-			})
-
-			three.on('pointerdown', function () {
-				console.log('change states3')
-				this.scene.scene.start('playingState')
-			})
-
-			four.on('pointerdown', function () {
-				console.log('change states4')
-				this.scene.scene.start('completeState')
-			})
-
-			five.on('pointerdown', function () {
-				console.log('change states5')
-				this.scene.scene.start('overState')
-			})
 		}
 		
 		this.makeTowerMenu = function(container){
@@ -102,49 +104,123 @@ class HUDLogic extends Phaser.Scene
 			cross.displayHeight = 100
 			towerMenu.add(cross, hud)
 			
+
+			
 			cross.on('pointerdown', function(){
 				mapLogic.removePrev(map.circle)
 				hud.towerMenu.destroy()
 			})
 			
 			if(container.getByName('tower') == null){
-				
 				hudLogic.makeMenuBuy(container)
 			}
 			else{
 				hudLogic.makeMenuStats(container)
 			}
-			
 		}
 		
 		this.makeMenuBuy = function(container){			
 			console.log('there is no tower at: ' + container.id)
-			var green = new Phaser.GameObjects.Image(hud, 0, -200, 'green').setInteractive()
-			green.displayWidth = 100
-			green.displayHeight = 100
 			
-			green.on('pointerdown', function(){
-				mapLogic.makeTower(container, resources.tower1)
-				hud.towerMenu.destroy()
-				console.log('tower made')
-			})
-			
-			hud.towerMenu.add(green, hud)
-			
-			var blue = new Phaser.GameObjects.Image(hud, 0, -100, 'blue').setInteractive()
-			blue.displayWidth = 100
-			blue.displayHeight = 100
-			
-			blue.on('pointerdown', function(){
-				mapLogic.makeTower(container, resources.tower2)
-				hud.towerMenu.destroy()
-				console.log('tower made')
-			})
-			
-			hud.towerMenu.add(blue, hud)
 
+			for(var i = 0; i < resources.startTowers.length; i++){
+				var tower = eval(resources.startTowers[i])
+				
+				var button = new Phaser.GameObjects.Image(hud, 0, -200 + 100 * i, tower.image).setInteractive()
+				
+
+				button.tower = tower
+				button.displayWidth = 100
+				button.displayHeight = 100	
+				button.name = 'towerButton'
+				
+
+				hudLogic.clickBuy(button, container, tower)
+					
+				hud.towerMenu.add(button, hud)				
+			}
+		}
+		
+		this.updateTint = function(){
+			if(hud.towerMenu){
+				hud.towerMenu.each(function(button){
+					if(button.name == 'towerButton'){
+						if(gameStats.money < button.tower.cost){
+							button.setTint('0xAA7878')
+						}
+						else{
+							button.clearTint()
+						}
+					}
+				})
+			}
+		}
+		
+		this.clickBuy = function(button, container, tower){
+			var towerMenu = hud.towerMenu
 			
+			hud.input.on('gameobjectmove', function(pointer, gameobject){
+//				try{
+					if(towerMenu.getByName('buyStats')){
+						towerMenu.getByName('buyStats').destroy()
+					}
+					
+					var towerStats = gameobject.tower
+
+					var bullet = eval(towerStats.bulletKey)
+					
+					var name = 'name: ' + towerStats.id
+					var damage = 'damage: ' + bullet.damage
+					var range = 'range: ' + towerStats.range
+					var speed = 'speed: ' + towerStats.speed
+					var cost = 'cost: ' + towerStats.cost
+					
+					var buyStats = new Phaser.GameObjects.Container(
+						hud,
+						pointer.x - towerMenu.x - 100,
+						pointer.y - towerMenu.y
+					)
+					buyStats.name = 'buyStats'
+
+					towerMenu.buyStats = towerMenu.add(buyStats, hud)
+
+
+					var red = new Phaser.GameObjects.Image(hud, 0, 0, 'red')
+					red.displayWidth = 200
+					red.displayHeight = 200
+					buyStats.add(red, hud)
+					
+					var config = {fontSize:'18px', color:'#000000', fontFamily: 'Arial'}
+
+
+					var displayStats = new Phaser.GameObjects.Text(
+						hud,
+						-50,
+						-90,
+						name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + cost,
+						config
+					)
+
+					buyStats.add(displayStats, hud)
+//				}
+//				catch(err){
+//					null
+//				}				
+			})
 			
+			hud.input.on('pointerout', function(){
+				if(towerMenu.getByName('buyStats')){
+						towerMenu.getByName('buyStats').destroy()
+				}
+			})
+			
+			button.on('pointerdown', function(){
+					hudLogic.removeTower(container)
+					mapLogic.makeTower(container, tower)
+					hud.towerMenu.destroy()
+					console.log(tower.id + ' made')
+					gameStats.money -= tower.cost
+				})
 		}
 		
 		this.makeMenuStats = function(container){
@@ -159,6 +235,8 @@ class HUDLogic extends Phaser.Scene
 				hud.towerMenu.destroy()
 			})
 			
+			
+			
 			hud.towerMenu.add(blue, hud)
 			
 			var tower = container.getByName('tower')
@@ -166,41 +244,53 @@ class HUDLogic extends Phaser.Scene
 			
 			
 			var name = ('name: ' + tower.id)
-			var towerName = new Phaser.GameObjects.Text(hud, -25, -225, name, { font: '12px Arial' })
-			towerName.setTint(0x000000);
-			hud.towerMenu.add(towerName, hud)
-			
 			var damage = ('damage: ' + bullet.damage)
-			var towerDamage = new Phaser.GameObjects.Text(hud, -25, -200, damage,{font: '12px Arial'})
-			towerDamage.setTint(0x000000)
-			hud.towerMenu.add(towerDamage, hud)
-			
-			var range = ('range: ' + tower.range)
-			var towerRange = new Phaser.GameObjects.Text(hud, -25, -175, range,{font: '12px Arial'})
-			towerRange.setTint(0x000000)
-			hud.towerMenu.add(towerRange, hud)
-			
+			var range = ('range: ' + tower.range)		
 			var speed = ('speed: ' + tower.speedMaster)
-			var towerSpeed = new Phaser.GameObjects.Text(hud, -25, -150, speed,{font: '12px Arial'})
-			towerSpeed.setTint(0x000000)
-			hud.towerMenu.add(towerSpeed, hud)
+
+			var config = {fontSize:'12px', color:'#000000', fontFamily: 'Arial'}
+
+
+			var displayStats = new Phaser.GameObjects.Text(
+				hud,
+				-40,
+				-225,
+				name + '\n' + damage+ '\n' + range + '\n' + speed,
+				config
+			)
+			hud.towerMenu.add(displayStats, hud)
+			
+			var upgrade = eval(tower.upgradeKey)
+			if(upgrade){
+				
+
+				var upgradeButton = new Phaser.GameObjects.Image(hud, 0, 0, upgrade.image).setInteractive()
+				
+				upgradeButton.tower = upgrade
+				upgradeButton.displayWidth = 100
+				upgradeButton.displayHeight = 100
+				upgradeButton.name = 'towerButton'
+				
+				hudLogic.clickBuy(upgradeButton, container, upgrade)
+				hud.towerMenu.add(upgradeButton, hud)
+			}
 
 			
 			
 //when clicked on, a circle appears around the tower indicating its attack range
-			var tower = container.getByName('tower')
+//			var tower = container.getByName('tower')
 			mapLogic.clickTower(tower)
 		}
 		
 		
 		this.removeTower = function(container){
-			
 			var tower = container.getByName('tower')
+			if(tower){
+				tower.destroy()
+				//if there is a circle showing attack range, remove that too
+				mapLogic.removePrev(map.circle)
+			}
 
-			tower.destroy()
-			
-//if there is a circle showing attack range, remove that too
-			mapLogic.removePrev(map.circle)
 		}
 		
 		this.changeSpeed = function(){
@@ -222,10 +312,31 @@ class HUDLogic extends Phaser.Scene
 				default:
 					break
 			}
+			
 			hud.speedButton.on('pointerdown', function(){
 				hudLogic.changeSpeed()
 				mapLogic.updateSpeed()
 			})
+		}
+		
+		this.showStats = function(){
+			var lives = 'lives: ' + gameStats.lives
+			var money = 'money: ' + gameStats.money
+			var score = 'score: ' + gameStats.score
+
+			mapLogic.removePrev(hud.gameLives)
+			mapLogic.removePrev(hud.gameMoney)
+			mapLogic.removePrev(hud.gameScore)
+
+			hud.gameLives = hud.add.text(200, 20, lives, { font: '32px Arial' })
+			hud.gameLives.setTint(0x000000);
+
+			hud.gameMoney = hud.add.text(350, 20, money, {font: '32px Arial'})
+			hud.gameMoney.setTint(0x000000)
+
+			hud.gameScore = hud.add.text(500, 20, score, {font: '32px Arial'})
+			hud.gameScore.setTint(0x000000)
+
 		}
 		
 		
