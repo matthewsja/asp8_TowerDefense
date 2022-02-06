@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager';
+
 import testTile from '../assets/menu.png';
 
 import one from '../assets/1.png'
@@ -51,28 +53,33 @@ class MenuState extends Phaser.Scene
 		five5 = this.add.image(450, 50, 'five').setInteractive()
 		
 		one1.on('pointerdown', function () {
-			console.log('change states1')
-			this.scene.scene.start('menuState')
+			console.log('change states1');
+			this.scene.scene.start('menuState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 		
 		two2.on('pointerdown', function () {
-			console.log('change states2')
-			this.scene.scene.start('levelState')
+			console.log('change states2');
+			this.scene.scene.start('levelState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 		
 		three3.on('pointerdown', function () {
-			console.log('change states3')
-			this.scene.scene.start('playingState')
+			console.log('change states3');
+			this.scene.scene.start('playingState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 		
 		four4.on('pointerdown', function () {
-			console.log('change states4')
-			this.scene.scene.start('completeState')
+			console.log('change states4');
+			this.scene.scene.start('completeState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 		
 		five5.on('pointerdown', function () {
-			console.log('change states5')
-			this.scene.scene.start('overState')
+			console.log('change states5');
+			this.scene.scene.start('overState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 		
     }
@@ -80,4 +87,3 @@ class MenuState extends Phaser.Scene
 }
 
 export default MenuState
-
