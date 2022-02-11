@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 
 import Resources from './resources.js'
 
-import Bootstrap from './states/bootstrap.js'
 import MenuState from './states/menu.js';
 import LevelState from './states/level.js';
 import PlayState from'./states/play.js'
@@ -28,7 +27,8 @@ const config = {
                 debug: true
             }
     },
-    scene: [Bootstrap, MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, HUDLogic, GameStats, Resources]
+    scene: [MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, HUDLogic, GameStats, Resources]
 };
+
 
 const game = new Phaser.Game(config);

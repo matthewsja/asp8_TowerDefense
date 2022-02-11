@@ -1,3 +1,5 @@
+import ten from './assets/10.png'
+
 class GameStats extends Phaser.Scene
 {
 	constructor ()
@@ -10,13 +12,16 @@ class GameStats extends Phaser.Scene
 
     preload ()
     {
+		this.load.image('ten', ten)
     }
       
     create ()
-    {
-	
-		var gameStats = this.scene.get('gameStats')
+    {	
 		
+		var gameStats = this.scene.get('gameStats')
+		var resources = this.scene.get('resources')
+
+//function that takes the starting parameters from the resources scene and feeds them to the gameStats scene
 		this.startParams = function(params){
 			gameStats.lives = params['lives']
 			gameStats.money = params['money']
@@ -25,6 +30,8 @@ class GameStats extends Phaser.Scene
 			gameStats.speedSetting = params['speedSetting']
 			gameStats.isPlaying = params['isPlaying']
 		}
+		
+		gameStats.startParams(resources.startParam)
 		
     }
 	

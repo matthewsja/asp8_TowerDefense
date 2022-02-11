@@ -13,14 +13,13 @@ class Enemy extends Phaser.GameObjects.PathFollower
 			config.y,
 			config.image
 		);
-		this.image = config.image;
     }
 
 //this is used to fillow the specified path
 	follow(self){
 		self.startFollow({
 				positionOnPath: true,
-				duration: enemy.pathLength/1,
+				duration: self.pathLength,
 				yoyo: false,
 				repeat: 0,
 				rotateToPath: false,
