@@ -1,5 +1,5 @@
 //background image repeated
-import grassTile from '../assets/grass.png';
+//import grassTile from '../assets/grass.png';
 
 
 
@@ -16,7 +16,7 @@ class PlayingState extends Phaser.Scene
     preload ()
     {
 		//background image
-        this.load.image('grass', grassTile);
+//        this.load.image('grass', grassTile);
 		
 
     }
@@ -27,9 +27,9 @@ class PlayingState extends Phaser.Scene
 
 		
 		//make the tiled background
-		this.backgroundTiles = this.add.container()	
-      	this.tile = this.add.tileSprite(400 , 300, 800, 600, 'grass')
-		this.backgroundTiles.add(this.tile);
+//		this.backgroundTiles = this.add.container()	
+//      	this.tile = this.add.tileSprite(400 , 300, 800, 600, 'grass')
+//		this.backgroundTiles.add(this.tile);
 		
 		this.scene.launch('resources')
 		

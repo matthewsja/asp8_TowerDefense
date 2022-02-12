@@ -22,25 +22,19 @@ import red from './assets/red_square.png'
 import blue from './assets/blue_square.png'
 
 import cross from './assets/x.png'
-
 import circle from './assets/circle.png'
+import sell from './assets/sell.png'
 
-//image of the path that the enemy travels
-import pathTile from './assets/path.png'
 //image of the enemy
 import enemy1 from './assets/enemy1.png'
 import enemy2 from './assets/enemy2.png'
-
-//image of where the enemy comes from
-import originTile from './assets/origin.png'
-//image of where the enemy head towards
-import destTile from './assets/destination.png'
 
 //image of the bullet
 import bullet1 from './assets/bullet1.png'
 import bullet2 from './assets/bullet2.png'
 
-import siteTile from './assets/site.png'
+
+import tileset from './assets/tileset.png'
 
 class Resources extends Phaser.Scene
 {
@@ -78,27 +72,25 @@ class Resources extends Phaser.Scene
 		
 		this.load.image('cross', cross)
 		this.load.image('circle', circle)
+		this.load.image('sell', sell)
 		
-		this.load.image('originTile', originTile)
-		this.load.image('destTile', destTile)
-		this.load.image('pathTile', pathTile)
 		this.load.image('enemy1', enemy1)
 		this.load.image('enemy2', enemy2)
 		
 		this.load.image('bullet1', bullet1)
 		this.load.image('bullet2', bullet2)	
-
-		this.load.image('site', siteTile)
+		
+		this.load.image('tileset', tileset)
     }
       
     create ()
     {
 		var resources = this.scene.get('resources')
-		var gameStats = this.scene.get('gameStats')
 		
-		
+//array indicating which towers are the starting towers
 		this.startTowers = ['resources.tower1a', 'resources.tower2a']
 		
+//different dictionaries displaying different towers and their stats
 		this.tower1a = {
 			id: 'tower_1a',
 			image: 'tower1a',
@@ -139,7 +131,7 @@ class Resources extends Phaser.Scene
 			upgradeKey: null
 		}
 
-		
+//different dictionaries displaying different bullets and their stats
 		this.bullet1a = {
 			image: 'bullet1',
 			size: [50, 50],
@@ -152,13 +144,13 @@ class Resources extends Phaser.Scene
 		this.bullet2a = {
 			image: 'bullet2',
 			size: [10, 10],
-			speed: 1000,
+			speed: 2000,
 			damage: 2,
 			damageType: 'normal',
 			AOE: 0
 		}
 
-	
+//different dictionaries displaying different enemies and their stats
 		this.enemy1 = {
 			image: 'enemy1',
 			size: [100, 100],
@@ -176,49 +168,7 @@ class Resources extends Phaser.Scene
 		}
 
 		
-		this.pathList1 = [
-			[0, 600],
-			[0, 500],
-			[0, 400],
-			[100, 400],
-			[100, 500],
-			[200, 500],
-			[200, 400],
-			[200, 300],
-			[300, 300],
-			[400, 300],
-			[500, 300],
-			[600, 300],
-			[700, 300],
-			[800, 300]
-		]
-		
-		this.pathList2 = [
-			[650, 50],
-			[650, 150],
-			[550, 150],
-			[550, 250],
-			[450, 250],
-			[350, 250],
-			[250, 250],
-			[150, 250],
-			[150, 350],
-			[50, 350],
-			[50, 450],
-			[150, 450],
-			[250, 450],
-			[250, 550]
-		]
-		
-//coordinates for the building sites		
-		this.siteList = [
-			[350, 450],
-			[250, 350],
-			[350, 350],
-			[150, 550]
-		]
-		
-
+//the starting parameters
 		this.startParam = {
 			lives: 20,
 			money: 10,
@@ -228,10 +178,35 @@ class Resources extends Phaser.Scene
 			isPlaying: true
 		}
 		
+//the nested array with data for the different waves
 		this.waveData = [
 			['resources.enemy1', 0.5, 10],
 			['resources.enemy2', 0.7, 7]
 		]
+		
+//the pause between waves
+		this.wavePause = 5
+		
+//the array storing the what tiles go where
+		this.tiles = [
+			[0,2,3,1,10,10,3,1],
+			[0,2,5,6,7,4,5,1],
+			[4,5,6,1,0,2,9,1],
+			[7,10,3,10,10,10,3,1],
+			[6,5,4,10,10,10,10,1],
+			[0,10,6,7,5,4,8,1]
+		]
+//other parameters of the map using the tileset
+//the size of each tile
+		this.size = 100
+//the indices for the tiles that the enemies could travel on
+		this.path = [4,5,6,7,8,9]
+//the index for the tile that the origin is located
+		this.origin = 8
+//the index for the tile that the destination is located
+		this.dest = 9
+//the index for the tile that the building sites are located
+		this.site = 10
     }
 	
 	update()
