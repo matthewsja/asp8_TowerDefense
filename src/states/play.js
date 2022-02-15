@@ -1,8 +1,3 @@
-//background image repeated
-//import grassTile from '../assets/grass.png';
-
-
-
 class PlayingState extends Phaser.Scene
 {
 	constructor ()
@@ -15,28 +10,12 @@ class PlayingState extends Phaser.Scene
 
     preload ()
     {
-		//background image
-//        this.load.image('grass', grassTile);
-		
-
     }
       
     create ()
     {
-		this.scene.sendToBack()
-
-		
-		//make the tiled background
-//		this.backgroundTiles = this.add.container()	
-//      	this.tile = this.add.tileSprite(400 , 300, 800, 600, 'grass')
-//		this.backgroundTiles.add(this.tile);
-		
-		this.scene.launch('resources')
-		
 		this.scene.launch('map')
-		this.scene.launch('mapLogic')
-		this.scene.launch('hud')	
-		this.scene.launch('hudLogic')
+		this.scene.launch('hud')
 		this.scene.launch('gameStats')
     }
 	

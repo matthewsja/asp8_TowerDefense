@@ -1,0 +1,16 @@
+{
+	"enemy_1":{
+		"image":"enemy1",
+		"size":[100,100],
+		"speed":0.5,
+		"hp":2,
+		"value":1
+	  },
+	"enemy_2":{
+		"image":"enemy2",
+		"size":[50,50],
+		"speed":0.7,
+		"hp":3,
+		"value":5
+  	}
+}

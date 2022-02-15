@@ -1,0 +1,38 @@
+{
+	"tower_1a":{
+		"name":"Basic Tower 1",
+		"image":"tower1a",
+		"bulletKey":"resources.bullets[\"bullet_1\"]",
+		"range":200,
+		"speed":2,
+		"cost":5,
+		"upgradeKey":"resources.towers[\"tower_1b\"]"
+	},
+	"tower_1b":{
+		"name":"Basic Tower 2",
+		"image":"tower1b",
+		"bulletKey":"resources.bullets[\"bullet_1\"]",
+		"range":250,
+		"speed":3,
+		"cost":7,
+		"upgradeKey":null
+	},
+	"tower_2a":{
+		"name":"Sniper Tower 1",
+		"image":"tower2a",
+		"bulletKey":"resources.bullets[\"bullet_2\"]",
+		"range":300,
+		"speed":1,
+		"cost":7,
+		"upgradeKey":"resources.towers[\"tower_2b\"]"
+	},
+	"tower_2b":{
+		"name":"Sniper Tower 2",
+		"image":"tower2b",
+		"bulletKey":"resources.bullets[\"bullet_2\"]",
+		"range":350,
+		"speed":1.5,
+		"cost":10,
+		"upgradeKey":null
+	}
+}

@@ -1,18 +1,4 @@
-import levelTile from '../assets/level.png';
-
-import one from '../assets/1.png'
-import two from '../assets/2.png'
-import three from '../assets/3.png'
-import four from '../assets/4.png'
-import five from '../assets/5.png'
-
-var tile
-
-var one1;
-var two2;
-var three3;
-var four4;
-var five5;
+var back;
 
 
 class LevelState extends Phaser.Scene
@@ -24,55 +10,73 @@ class LevelState extends Phaser.Scene
 
     preload ()
     {
-        this.load.image('level', levelTile);
-		this.load.image('one', one)
-		this.load.image('two', two)
-		this.load.image('three', three)
-		this.load.image('four', four)
-		this.load.image('five', five)
     }
       
     create ()
-    {
+    {	
 		this.scene.stop('gameStats')
 		this.scene.stop('hud')
 		this.scene.stop('map')
 		
-		var container = this.add.container(400, 300)	
-
-      	tile = this.add.tileSprite(0 , 0, 800, 600, 'level')
-		container.add(tile);
+		var resources = this.scene.get('resources')
+		var level = this.scene.get('level')
 		
-		one1 = this.add.image(50, 50, 'one').setInteractive()
-		two2 = this.add.image(150, 50, 'two').setInteractive()
-		three3 = this.add.image(250, 50, 'three').setInteractive()
-		four4 = this.add.image(350, 50, 'four').setInteractive()
-		five5 = this.add.image(450, 50, 'five').setInteractive()
+		back = this.add.image(50, 50, 'menu').setInteractive()
 		
-		one1.on('pointerdown', function () {
+		back.on('pointerdown', function () {
 			console.log('change states1')
 			this.scene.scene.start('menuState')
 		})
 		
-		two2.on('pointerdown', function () {
-			console.log('change states2')
-			this.scene.scene.start('levelState')
-		})
 		
-		three3.on('pointerdown', function () {
-			console.log('change states3')
-			this.scene.scene.start('playingState')
-		})
+		this.makeButton = function(level, x, y){
+			var levelButton = this.add.image(x, y, resources.levels[level]['selection']['picture']).setInteractive()
+			
+			levelButton.on('pointerdown', function(){
+				this.scene.clickButton(level)
+			})
+			
+		}
 		
-		four4.on('pointerdown', function () {
-			console.log('change states4')
-			this.scene.scene.start('completeState')
-		})
+		this.levelButtons = function(){
+			for(var i = 0; i < resources.levelList.length; i++){
+				var x
+				var y = 250
+				switch (i){
+					case 0:
+						x = 50
+						break;
+					case 1: 
+						x = 150
+						break;
+					case 2:
+						x = 250
+						break;
+					case 3:
+						x = 350
+						break;
+					case 4:
+						x = 450
+						break;
+					default:
+						console.log('x error')
+						break;
+				}
+				this.makeButton(resources.levelList[i], x, y)		
+			}
+		}
 		
-		five5.on('pointerdown', function () {
-			console.log('change states5')
-			this.scene.scene.start('overState')
-		})
+		this.levelButtons()
+		
+		
+		
+		this.clickButton = function(level){
+			resources.levelSelect = level.toString()
+			resources.mapData = resources.levels[resources.levelSelect]
+			this.scene.start('playingState')		
+		}
+
+		
     }
 	
 }

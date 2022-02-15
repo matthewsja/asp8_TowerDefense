@@ -1,12 +1,12 @@
 import AudioManager, { SFX } from '../audiomanager/audioManager';
 
-import testTile from '../assets/menu.png';
+import testTile from '../assets/images/menu.png';
 
-import one from '../assets/1.png'
-import two from '../assets/2.png'
-import three from '../assets/3.png'
-import four from '../assets/4.png'
-import five from '../assets/5.png'
+//import one from '../assets/1.png'
+//import two from '../assets/2.png'
+//import three from '../assets/3.png'
+//import four from '../assets/4.png'
+import five from '../assets/images/5.png'
 
 var tile
 
@@ -27,10 +27,6 @@ class MenuState extends Phaser.Scene
     preload ()
     {
         this.load.image('tile', testTile);
-		this.load.image('one', one)
-		this.load.image('two', two)
-		this.load.image('three', three)
-		this.load.image('four', four)
 		this.load.image('five', five)
     }
       
@@ -39,8 +35,7 @@ class MenuState extends Phaser.Scene
 		this.scene.stop('gameStats')
 		this.scene.stop('hud')
 		this.scene.stop('map')
-		
-		
+			
 		var container = this.add.container(400, 300)	
 
       	tile = this.add.tileSprite(0 , 0, 800, 600, 'tile')

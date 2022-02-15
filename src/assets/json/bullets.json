@@ -1,0 +1,17 @@
+{
+	"bullet_1":{
+		"image":"bullet1",
+		"size":[50,50],
+		"speed":500,
+		"damage":1,"damageType":"normal",
+		"AOE":0
+	},
+	"bullet_2":{
+		"image":"bullet2",
+		"size":[10,10],
+		"speed":2000,
+		"damage":2,
+		"damageType":"normal",
+		"AOE":0
+	}
+}
