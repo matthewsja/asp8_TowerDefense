@@ -1,9 +1,0 @@
-{
-	"enemy_2":{
-		"image":"enemy2",
-		"size":[50,50],
-		"speed":0.7,
-		"hp":3,
-		"value":5
-  	}
-}
