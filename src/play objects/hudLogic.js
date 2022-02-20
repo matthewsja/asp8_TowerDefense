@@ -4,7 +4,6 @@ class HUDLogic extends Phaser.Scene
     {
 //the scene changes to this one when this keyword is used
         super('hudLogic');
-		Phaser.Scene.call(this,{key: 'hudLogic'})
     }
 
     preload ()
@@ -13,6 +12,7 @@ class HUDLogic extends Phaser.Scene
       
     create ()
     {
+//these allow usage of attributes and functions from other scenes
 		var resources = this.scene.get('resources')	
 		var hud = this.scene.get('hud')
 		var hudLogic = this.scene.get('hudLogic')
@@ -20,7 +20,8 @@ class HUDLogic extends Phaser.Scene
 		var mapLogic = this.scene.get('mapLogic')
 		var gameStats = this.scene.get('gameStats')
 		
-//this function helps ensure that the building site tiles could be interacted with correctly
+//this function helps ensure that the building site tiles could be interacted with correctly by creating an instance of hud.settings with an 'active' attribute
+//this instance is removed instantly but it still remains in the memory
 		this.startHud = function(){
 			var settings = new Phaser.GameObjects.Container(hud, 400, 300)
 			hud.settings = hud.add.existing(settings)
@@ -45,6 +46,8 @@ class HUDLogic extends Phaser.Scene
 			
 //create the settings container right in the middle of the game window
 			var settings = new Phaser.GameObjects.Container(hud, 400, 300)
+//when this attribute is true, clicking on building sites does nothing
+//when it is false, clicking on them opens up the tower menu
 			settings.active = true
 			hud.settings = hud.add.existing(settings)
 			
@@ -61,7 +64,7 @@ class HUDLogic extends Phaser.Scene
 			resume.displayWidth = 200
 			resume.displayHeight = 100
 			
-//create a restart button that when clicked on resets all the states of all the objects in the game and all the stats
+//create a restart button that when clicked on, resets the states of all the objects in the game as well as the stats
 			var restart = new Phaser.GameObjects.Image(hud, 0, -30, 'restart').setInteractive()
 			settings.add(restart, hud)
 			
@@ -81,6 +84,9 @@ class HUDLogic extends Phaser.Scene
 				
 				map.input.manager.enabled = true
 				map.origin.state = 'created'
+				map.towerGroup.getChildren().forEach(function(tower){
+					tower.state = 'ready'
+				})
 				hud.speedButton.setInteractive()
 				rec.destroy()
 				settings.destroy()
@@ -109,7 +115,7 @@ class HUDLogic extends Phaser.Scene
 			mapLogic.removePrev(hud.towerMenu)
 
 //create a tower menu object and add it to the HUD
-			var towerMenu = new Phaser.GameObjects.Container(hud, 750, 350)
+			var towerMenu = new Phaser.GameObjects.Container(hud, 850, 350)
 			hud.towerMenu = hud.add.existing(towerMenu)
 			
 //create a red rectangle that serves as the background of the tower menu
@@ -130,7 +136,7 @@ class HUDLogic extends Phaser.Scene
 				hud.towerMenu.destroy()
 			})
 			
-//this is to decide if the buy menu or the stats page is to be displayed
+//this is used to decide if the buy menu or the stats page is to be displayed
 //it depends on whether the tile is being occupied by a tower at the moment
 //if there is not tower at the tile then the buy menu is displayed
 			if(tile.tower == -1 || !tile.tower){
@@ -144,9 +150,7 @@ class HUDLogic extends Phaser.Scene
 				console.log('there is a tower')
 //if there is a tower then the stats of the occupying tower is displayed
 				hudLogic.makeMenuStats(tile)
-			}
-			
-			
+			}	
 		}
 
 //function that displays all the towers that could be bought
@@ -195,14 +199,13 @@ class HUDLogic extends Phaser.Scene
 		this.clickBuy = function(button, tile, tower){
 			var towerMenu = hud.towerMenu
 //this is for when the mouse is over the button		
-			hud.input.on('gameobjectmove', function(pointer, gameobject){
+			hud.input.on('pointerover', function(pointer, gameobject){
 				try{
 					if(towerMenu.getByName('buyStats')){
 						towerMenu.getByName('buyStats').destroy()
 					}
 //as input does not allow outside varibles to pass to it, the tower parameters passed onto the button is used
-					var towerStats = gameobject.tower
-
+					var towerStats = gameobject[0].tower
 					var bullet = eval(towerStats.bulletKey)
 					
 					var name = 'name: ' + towerStats.name
@@ -210,6 +213,15 @@ class HUDLogic extends Phaser.Scene
 					var range = 'range: ' + towerStats.range
 					var speed = 'speed: ' + towerStats.speed
 					var cost = 'cost: ' + towerStats.cost
+					
+					var desc
+					if(bullet.AOE > 0){
+						var AOE = 'AOE: ' + bullet.AOE
+						desc = name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + AOE + '\n' + cost
+					}
+					else{
+						desc = name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + cost
+					}
 					
 //creates a little window to the left of the mouse which displays the stats of the tower
 					var buyStats = new Phaser.GameObjects.Container(
@@ -233,9 +245,9 @@ class HUDLogic extends Phaser.Scene
 //display the stats in the little window
 					var displayStats = new Phaser.GameObjects.Text(
 						hud,
-						-50,
 						-90,
-						name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + cost,
+						-90,
+						desc,
 						config
 					)
 
@@ -308,7 +320,7 @@ class HUDLogic extends Phaser.Scene
 			var damage = ('damage: ' + bullet.damage)
 			var range = ('range: ' + tower.range)		
 			var speed = ('speed: ' + tower.speedMaster)
-			
+
 //the font and typeface of the words to come
 			var config = {fontSize:'12px', color:'#000000', fontFamily: 'Arial'}
 //display the stats of the tower
@@ -351,7 +363,7 @@ class HUDLogic extends Phaser.Scene
 			})
 //set the id of the tower in the tile to 0 which is read as 'false' in Javascript
 			tile.tower = 0
-			//if there is a circle showing attack range, remove that too
+//if there is a circle showing attack range, remove that too
 			mapLogic.removePrev(map.circle)
 			
 		}
@@ -364,16 +376,24 @@ class HUDLogic extends Phaser.Scene
 			switch(gameStats.speedSetting){
 				case 1:
 					gameStats.speedSetting = 2
-					hud.speedButton  = hud.add.image(50, 550, 'two').setInteractive()
+					hud.speedButton  = hud.add.image(50, 650, 'arrow2').setInteractive()
 
 					break;
 				case 2:
 					gameStats.speedSetting = 3
-					hud.speedButton  = hud.add.image(50, 550, 'three').setInteractive()
+					hud.speedButton  = hud.add.image(50, 650, 'arrow3').setInteractive()
 					break;
 				case 3:
+					gameStats.speedSetting = 0
+					hud.speedButton  = hud.add.image(50, 650, 'pause').setInteractive()
+					break;
+				case 0:
 					gameStats.speedSetting = 1
-					hud.speedButton  = hud.add.image(50, 550, 'one').setInteractive()
+					hud.speedButton  = hud.add.image(50, 650, 'arrow1').setInteractive()
+					map.origin.state = 'created'
+					map.towerGroup.getChildren().forEach(function(tower){
+						tower.state = 'ready'
+					})
 					break;
 					
 				default:
@@ -389,24 +409,21 @@ class HUDLogic extends Phaser.Scene
 //display the stats of the current playthrough
 		this.showStats = function(){
 //get the stats from the gameStats scene
+			var wave = 'wave: ' + (map.origin.waveCounter+1)
 			var lives = 'lives: ' + gameStats.lives
 			var money = 'money: ' + gameStats.money
 			var score = 'score: ' + gameStats.score
 
 //remove any previous iterations of the display of these stats so the current version won't overlap with previous ones
-			mapLogic.removePrev(hud.gameLives)
-			mapLogic.removePrev(hud.gameMoney)
-			mapLogic.removePrev(hud.gameScore)
+			mapLogic.removePrev(hud.wave)
+			mapLogic.removePrev(hud.gameStats)
 
 //display the stats
-			hud.gameLives = hud.add.text(200, 20, lives, { font: '32px Arial' })
-			hud.gameLives.setTint(0x000000);
+			hud.wave = hud.add.text(200, 610, wave, {font: '32px Arial'})
+			hud.gameStats = hud.add.text(200, 640, lives + ' ' + money + ' ' + score, { font: '32px Arial' })
+			hud.wave.setTint(0xFFFFFF);
+			hud.gameStats.setTint(0xFFFFFF);
 
-			hud.gameMoney = hud.add.text(350, 20, money, {font: '32px Arial'})
-			hud.gameMoney.setTint(0x000000)
-
-			hud.gameScore = hud.add.text(500, 20, score, {font: '32px Arial'})
-			hud.gameScore.setTint(0x000000)
 
 		}
 		
@@ -415,13 +432,13 @@ class HUDLogic extends Phaser.Scene
 //remove any previous iterations of the display of these stats so the current version won't overlap with previous ones
 			mapLogic.removePrev(hud.timerText)
 //check if the timer is active
-			if(map.timer){
+			if(map.origin.coolDown){
 //if the timer is active, get the amount of time left in seconds and display it
-				var timer = map.timer
+				var timer = map.origin.coolDown
 				var remaining = 'time left: ' + Math.ceil(timer.getRemainingSeconds())
 				
-				hud.timerText = hud.add.text(200, 50, remaining, {font: '32px Arial'})
-				hud.timerText.setTint(0x000000)
+				hud.timerText = hud.add.text(200, 670, remaining, {font: '32px Arial'})
+				hud.timerText.setTint(0xFFFFFF)
 			}
 		}		
     }

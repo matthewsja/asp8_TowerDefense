@@ -1,0 +1,11 @@
+{
+	"tower_2b":{
+		"name":"Sniper Tower 2",
+		"image":"tower2b",
+		"bulletKey":"resources.bullets[\"bullet_2\"]",
+		"range":350,
+		"speed":1.5,
+		"cost":10,
+		"upgradeKey":null
+	}
+}

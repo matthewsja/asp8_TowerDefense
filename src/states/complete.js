@@ -1,12 +1,3 @@
-import completeTile from '../assets/images/complete.png';
-
-
-var tile
-
-var one1;
-var two2;
-var three3;
-
 class CompleteState extends Phaser.Scene
 {
 	constructor ()
@@ -16,7 +7,6 @@ class CompleteState extends Phaser.Scene
 
     preload ()
     {
-        this.load.image('complete', completeTile);
     }
       
     create ()
@@ -25,31 +15,37 @@ class CompleteState extends Phaser.Scene
 		this.scene.stop('hud')
 		this.scene.stop('map')
 		
-		var container = this.add.container(400, 300)	
-
-      	tile = this.add.tileSprite(0 , 0, 800, 600, 'complete')
-		container.add(tile);
+		var gameRecords = this.scene.get('gameRecords')
 		
-		one1 = this.add.image(50, 50, 'one').setInteractive()
-		two2 = this.add.image(150, 50, 'two').setInteractive()
-		three3 = this.add.image(250, 50, 'three').setInteractive()
+		var score = 'Score: ' + gameRecords.score
+		var topScore = 'Top Score: ' + gameRecords.topScore
 		
-		one1.on('pointerdown', function () {
-			console.log('change states1')
+		var lives = 'Lives Left: ' + gameRecords.lives
+		
+		this.endResults = this.add.text(350, 0, 'Level Complete \n' + score + '\n' + topScore + '\n' + lives, { font: '32px Arial' })
+		
+		var menu = this.add.image(450, 200, 'menu').setInteractive()
+		menu.displayWidth = 200
+		menu.displayHeight = 100
+		var level = this.add.image(450, 350, 'level').setInteractive()
+		level.displayWidth = 200
+		level.displayHeight = 100
+		var restart = this.add.image(450, 500, 'restart').setInteractive()
+		restart.displayWidth = 200
+		restart.displayHeight = 100
+		
+		menu.on('pointerdown', function () {
 			this.scene.scene.start('menuState')
 		})
 		
-		two2.on('pointerdown', function () {
-			console.log('change states2')
+		level.on('pointerdown', function () {
 			this.scene.scene.start('levelState')
 		})
 		
-		three3.on('pointerdown', function () {
-			console.log('change states3')
+		restart.on('pointerdown', function () {
 			this.scene.scene.start('playingState')
 		})
     }
-	
 }
 
 export default CompleteState

@@ -4,8 +4,6 @@ class PlayingState extends Phaser.Scene
     {
 //the scene changes to this one when this keyword is used
         super('playingState');
-		Phaser.Scene.call(this,{key: 'playingState'})
-
     }
 
     preload ()

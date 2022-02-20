@@ -16,9 +16,9 @@ class HUD extends Phaser.Scene
       
     create ()
     {	
+//these allow usage of attributes and functions from other scenes
 		var hud = this.scene.get('hud')
 		var hudLogic = this.scene.get('hudLogic')
-		var map = this.scene.get('map')
 		var mapLogic = this.scene.get('mapLogic')
 
 //call function that creates the settings container at the start
@@ -26,7 +26,7 @@ class HUD extends Phaser.Scene
 		hudLogic.startHud()
 		
 //create the image of the circle at the top right
-		this.circle = this.add.image(750, 50, 'circle').setInteractive()
+		this.circle = this.add.image(850, 50, 'circle').setInteractive()
 
 //when the circle is clicked on, the function that makes the settings is called
 		this.circle.on('pointerdown', function(){
@@ -34,7 +34,7 @@ class HUD extends Phaser.Scene
 		})
 		
 //create the speed button at the bottom left
-		this.speedButton  = this.add.image(50, 550, 'one').setInteractive()
+		this.speedButton  = this.add.image(50, 650, 'arrow1').setInteractive()
 		
 //when the speed button is clicked on, the speed speed of the game changes
 		this.speedButton.on('pointerdown', function(){
@@ -46,16 +46,11 @@ class HUD extends Phaser.Scene
 	
 	update()
 	{	
-		var hud = this.scene.get('hud')
+//this allows usage of functions from other scenes
 		var hudLogic = this.scene.get('hudLogic')
-		var map = this.scene.get('map')
-		var mapLogic = this.scene.get('mapLogic')
 		
 		hudLogic.updateTint()
 		hudLogic.showStats()
-		
-
-		
 		hudLogic.showTimer()
 
 		

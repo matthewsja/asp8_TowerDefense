@@ -1,0 +1,11 @@
+{
+	"tower_1a":{
+		"name":"Basic Tower 1",
+		"image":"tower1a",
+		"bulletKey":"resources.bullets[\"bullet_1\"]",
+		"range":200,
+		"speed":2,
+		"cost":5,
+		"upgradeKey":"resources.towers[\"tower_1b\"]"
+	}
+}

@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
-import Resources from './resources.js'
+import Resources from './utilities/resources.js'
+import GameRecords from './utilities/gameRecords.js'
 
 import Bootstrap from './states/bootstrap.js'
 import MenuState from './states/menu.js';
@@ -19,8 +20,8 @@ import GameStats from './play objects/gameStats.js'
 const config = {
     type: Phaser.AUTO,
     parent: 'phaser-game',
-    width: 800,
-    height: 600,
+    width: 900,
+    height: 700,
 	    physics: {
         default: 'arcade',
 			arcade: {
@@ -28,6 +29,6 @@ const config = {
                 debug: true
             }
     },
-    scene: [Bootstrap, MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, HUDLogic, GameStats, Resources]
+    scene: [Bootstrap, MenuState, LevelState, CompleteState, PlayState, OverState, Map, MapLogic, HUD, HUDLogic, GameStats, Resources, GameRecords]
 };
 const game = new Phaser.Game(config);

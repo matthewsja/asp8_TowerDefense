@@ -1,13 +1,5 @@
 import overTile from '../assets/images/over.png';
 
-
-
-var tile
-
-var one1;
-var two2;
-var three3;
-
 class OverState extends Phaser.Scene
 {
 	constructor ()
@@ -26,28 +18,35 @@ class OverState extends Phaser.Scene
 		this.scene.stop('hud')
 		this.scene.stop('map')
 		
+		var gameRecords = this.scene.get('gameRecords')
 		
-		var container = this.add.container(400, 300)	
-
-      	tile = this.add.tileSprite(0 , 0, 800, 600, 'over')
-		container.add(tile);
+		var score = 'Score: ' + gameRecords.score
+		var topScore = 'Top Score: ' + gameRecords.topScore
 		
-		one1 = this.add.image(50, 50, 'one').setInteractive()
-		two2 = this.add.image(150, 50, 'two').setInteractive()
-		three3 = this.add.image(250, 50, 'three').setInteractive()
+		var waves = 'Waves Survived: ' + gameRecords.wavesSurvived
 		
-		one1.on('pointerdown', function () {
-			console.log('change states1')
+		this.endResults = this.add.text(350, 0, 'Game Over \n' + score + '\n' + topScore + '\n' + waves, { font: '32px Arial' })
+		
+		
+		var menu = this.add.image(450, 250, 'menu').setInteractive()
+		menu.displayWidth = 200
+		menu.displayHeight = 100
+		var level = this.add.image(450, 400, 'level').setInteractive()
+		level.displayWidth = 200
+		level.displayHeight = 100
+		var restart = this.add.image(450, 550, 'restart').setInteractive()
+		restart.displayWidth = 200
+		restart.displayHeight = 100
+		
+		menu.on('pointerdown', function () {
 			this.scene.scene.start('menuState')
 		})
 		
-		two2.on('pointerdown', function () {
-			console.log('change states2')
+		level.on('pointerdown', function () {
 			this.scene.scene.start('levelState')
 		})
 		
-		three3.on('pointerdown', function () {
-			console.log('change states3')
+		restart.on('pointerdown', function () {
 			this.scene.scene.start('playingState')
 		})
     }
