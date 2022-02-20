@@ -409,24 +409,21 @@ class HUDLogic extends Phaser.Scene
 //display the stats of the current playthrough
 		this.showStats = function(){
 //get the stats from the gameStats scene
+			var wave = 'wave: ' + (map.origin.waveCounter+1)
 			var lives = 'lives: ' + gameStats.lives
 			var money = 'money: ' + gameStats.money
 			var score = 'score: ' + gameStats.score
 
 //remove any previous iterations of the display of these stats so the current version won't overlap with previous ones
-			mapLogic.removePrev(hud.gameLives)
-			mapLogic.removePrev(hud.gameMoney)
-			mapLogic.removePrev(hud.gameScore)
+			mapLogic.removePrev(hud.wave)
+			mapLogic.removePrev(hud.gameStats)
 
 //display the stats
-			hud.gameLives = hud.add.text(200, 620, lives, { font: '32px Arial' })
-			hud.gameLives.setTint(0xFFFFFF);
+			hud.wave = hud.add.text(200, 610, wave, {font: '32px Arial'})
+			hud.gameStats = hud.add.text(200, 640, lives + ' ' + money + ' ' + score, { font: '32px Arial' })
+			hud.wave.setTint(0xFFFFFF);
+			hud.gameStats.setTint(0xFFFFFF);
 
-			hud.gameMoney = hud.add.text(350, 620, money, {font: '32px Arial'})
-			hud.gameMoney.setTint(0xFFFFFF)
-
-			hud.gameScore = hud.add.text(500, 620, score, {font: '32px Arial'})
-			hud.gameScore.setTint(0xFFFFFF)
 
 		}
 		
@@ -440,7 +437,7 @@ class HUDLogic extends Phaser.Scene
 				var timer = map.origin.coolDown
 				var remaining = 'time left: ' + Math.ceil(timer.getRemainingSeconds())
 				
-				hud.timerText = hud.add.text(200, 650, remaining, {font: '32px Arial'})
+				hud.timerText = hud.add.text(200, 670, remaining, {font: '32px Arial'})
 				hud.timerText.setTint(0xFFFFFF)
 			}
 		}		

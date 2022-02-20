@@ -154,6 +154,22 @@ constructor ()
 //current HP of the enemy, changes if it is attacked
 				enemy.HP = enemy.maxHP;
 //amount of money rewarded when the enemy is defeated
+				
+				enemy.HPPortion = enemy.HP/enemy.maxHP
+				
+				enemy.maxHPBar = map.add.graphics()
+				enemy.maxHPBar.x = enemy.x - enemy.size[0]/2
+				enemy.maxHPBar.y = enemy.y - enemy.size[1]/2 - 10
+				enemy.maxHPBar.fillStyle(0xe74c3c)
+				enemy.maxHPBar.fillRect(enemy.maxHPBar.x, enemy.maxHPBar.y, enemy.size[0], 20)
+				
+				enemy.HPBar = map.add.graphics()
+				enemy.HPBar.x = enemy.x - enemy.size[0]/2
+				enemy.HPBar.y = enemy.y - enemy.size[1]/2 - 10
+				enemy.HPBar.fillStyle(0x2ecc71)
+				enemy.HPBar.fillRect(enemy.HPBar.x, enemy.HPBar.y, enemy.size[0], 20)
+				enemy.HPBar.scaleX = enemy.HPPortion
+				
 				enemy.value = key['value']
 
 //add the follower to the list of enemies
@@ -173,7 +189,9 @@ constructor ()
 //check if the enemy has reached the destination
 //if it has reached it, call the function to handle such an event
 				map.physics.add.overlap(enemy, map.dest, mapLogic.enemyReachDest)
-
+				
+				
+				
 //if an enemy is somehow buggy, this function will remove the enemy one minute after it has spawned
 				enemy.lifeTime = map.time.delayedCall(60000, mapLogic.debugEnemy, [enemy], map)
 //change the state of the enemy so it won't make another enemy yet
@@ -183,12 +201,29 @@ constructor ()
 			}
 		}
 		
+		this.removeEnemy = function(enemy){
+			enemy.maxHPBar.destroy()
+			enemy.HPBar.destroy()
+			enemy.destroy()
+		}
+		
 //remove the enemy one minute after it has spawned in case it is buggy
 		this.debugEnemy = function(enemy){
-			enemy.destroy()
+			mapLogic.removeEnemy(enemy)
 			console.log('buggy enemy')
 		}
 
+		this.updateHPBar = function(enemy){
+			enemy.maxHPBar.x = enemy.x
+			enemy.maxHPBar.y = enemy.y - 20
+
+			enemy.HPPortion = enemy.HP/enemy.maxHP
+			enemy.HPBar.scaleX = enemy.HPPortion
+
+			enemy.HPBar.x = enemy.x - enemy.size[0]*(1-enemy.HPPortion)/2
+			enemy.HPBar.y = enemy.y - 20
+		}
+		
 		
 //function for initiating the first wave
 		this.startGame = function(){
@@ -200,6 +235,15 @@ constructor ()
 //the values to change to are based on the value of the origin's waveCounter and the input wave data
 			mapLogic.makeWave(waveData[map.origin.waveCounter])
 		}
+		
+		this.rushWave = function(){
+			map.start.on('pointerdown', function(){
+				if(map.origin.coolDown){
+					mapLogic.callNextWave()
+				}
+			})
+		}
+		
 		
 //function for changing the parameters of the origin so it is ready for another wave
 		this.makeWave = function(waveData){
@@ -298,7 +342,7 @@ constructor ()
 //any bullets targeting it will be removed when it happens
 			enemy.destReached = true;
 //remove the enemy from the enemy group
-			enemy.destroy()
+			mapLogic.removeEnemy(enemy)
 //decrease the number of lives by 1
 			gameStats.lives -= 1;
 			console.log('lives: ' + gameStats.lives)
@@ -539,7 +583,7 @@ constructor ()
 			console.log('enemy hp: ' + enemy.HP)
 //if the enemy has 0 hp then money increases
 			if(enemy.HP <= 0){
-				enemy.destroy()
+				mapLogic.removeEnemy(enemy)
 				gameStats.money += enemy.value
 				console.log('money: ' + gameStats.money)
 				gameStats.score += enemy.value
@@ -550,7 +594,6 @@ constructor ()
 		this.updateBullet = function(bullet){
 //if the enemy's hp is 0 or it reaches the destination, the bullet is removed from the world
 			if((bullet.target.HP <= 0) || (bullet.target.destReached)){
-				bullet.target.destroyEnemy(bullet.target)
 				bullet.destroy()
 			}
 		}
@@ -569,6 +612,8 @@ constructor ()
 				enemy.speed = enemy.speedMaster * gameStats.playSpeed
 				enemy.pathTween.timeScale = enemy.speed
 				enemy.lifeTime.timeScale = gameStats.playSpeed
+
+				
 			})
 			
 //update the cooldown speed of the origin
@@ -588,13 +633,16 @@ constructor ()
 				}									 
 		 	})
 			
+	
 //when the start button is clicked on while the origin is cooling down, the next wave is instantly called
 			map.start.on('pointerdown', function(){
 				if(map.origin.coolDown){
-					mapLogic.callWave()
+					mapLogic.callNextWave()
 				}
 			})
 		}
+		
+
 		
 //this removes the previous version of an object so there won't be multiple versions of the same object
 		this.removePrev = function(object){

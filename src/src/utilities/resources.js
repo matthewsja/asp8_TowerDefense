@@ -11,177 +11,261 @@ class Resources extends Phaser.Scene
     {
 		this.assets = {
 			'one': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/1.png'
 			},
 			'two': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/2.png'
 			},
 			'three':{
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/3.png'
 			},
 			'four': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/4.png'
 			},
 			'six': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/6.png'
 			},
 			'seven': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/7.png'
 			},	
 			'tower1a': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tower1a.png'
 			},
 			'tower2a':  {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tower2a.png'
 			},
 			'tower3a': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tower3a.png'
 			},
 
 			'tower1b':  {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tower1b.png'
 			},
 			'tower2b':  {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tower2b.png'
 			},
 			'tower3b': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tower3b.png'
 			},
 			'resume':  {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/resume.png'
 			},
 			'restart': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/restart.png'
 			},
 			'menu': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/menu.png'
 			},
 			'red': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/red_square.png'
 			},
 			'blue': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/blue_square.png'
 			},	
 			'cross': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/x.png'
 			},
 			'circle': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/circle.png'
 			},
 			'sell': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/sell.png'
 			},
 			'enemy1': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/enemy1.png'
 			},
 			'enemy2': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/enemy2.png'
 			},
 			
 			'bullet1': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/bullet1.png'
 			},
 			'bullet2': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/bullet2.png'
 			},	
 			'bullet3': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/bullet3.png'
 			},
-
 			'tileset': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/tileset.png'
 			},
 			'level': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/level.png'
 			},
 			'arrow1': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/arrow1.png'
 			},
 			'arrow2': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/arrow2.png'
 			},
 			'arrow3': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/arrow3.png'
 			},
 			'pause': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/pause.png'
 			},
 			'start': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/start.png'
 			},
 			'left': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/left.png'
 			},
 			'rush': {
-				type: 'image',
+				fileType: 'image',
 				path:'src/assets/images/rush.png'
 			},
-			'towerData': {
-				type: 'json',
-				path:'src/assets/json/towers.json'
+			'bulletD1':{
+				fileType: 'json',
+				dataType: 'bullet',
+				path:'src/assets/json/bullets/1.json'
 			},
-			'bulletData':{
-				type: 'json',
-				path:'src/assets/json/bullets.json'
+			'bulletD2':{
+				fileType: 'json',
+				dataType: 'bullet',
+				path:'src/assets/json/bullets/2.json'
 			},
-			'enemyData':{
-				type: 'json',
-				path:'src/assets/json/enemies.json'
+			'bulletD3':{
+				fileType: 'json',
+				dataType: 'bullet',
+				path:'src/assets/json/bullets/3.json'
 			},
-			'levelData':{
-				type: 'json',
-				path:'src/assets/json/levels.json'
-			}		
+			'towerD1':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/1.json'
+			},
+			'towerD2':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/2.json'
+			},
+			'towerD3':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/3.json'
+			},
+			'towerD4':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/4.json'
+			},
+			'towerD5':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/5.json'
+			},
+			'towerD6':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/6.json'
+			},
+			'enemyD1':{
+				fileType: 'json',
+				dataType: 'enemy',
+				path:'src/assets/json/enemies/1.json'
+			},
+			'enemyD2':{
+				fileType: 'json',
+				dataType: 'enemy',
+				path:'src/assets/json/enemies/2.json'
+			},
+			'levelD1':{
+				fileType: 'json',
+				dataType: 'level',
+				path:'src/assets/json/levels/1.json'
+			},
+			'levelD2':{
+				fileType: 'json',
+				dataType: 'level',
+				path:'src/assets/json/levels/2.json'
+			},
+			'levelD3':{
+				fileType: 'json',
+				dataType: 'level',
+				path:'src/assets/json/levels/3.json'
+			}
 		}
+				
+		this.bulletStore = []
+		this.towerStore = []
+		this.levelStore = []
+		this.enemyStore = []
 		
 		for (const key of Object.keys(this.assets)) {
-			if(this.assets[key]['type'] == 'image'){
+			if(this.assets[key]['fileType'] == 'image'){
 				this.load.image(key, this.assets[key]['path'])
 			}
-			else if(this.assets[key]['type'] == 'json'){
+			else if(this.assets[key]['fileType'] == 'json'){
 				this.load.json(key, this.assets[key]['path'])
+				switch(this.assets[key]['dataType']){
+					case 'bullet':
+						this.bulletStore.push(key)
+						break;
+					case 'tower':
+						this.towerStore.push(key)
+						break;
+					case 'level':
+						this.levelStore.push(key)
+						break;
+					case 'enemy':
+						this.enemyStore.push(key)
+						break;
+					default:
+						break;
+				}
 			}
 		}
     }
-      
-    create ()
+		
+	create ()
     {		
+		this.makeDict = function(store, dict){
+			for(var i = 0; i < store.length; i++){
+				var data = this.cache.json.get(store[i])
+				for (const key of Object.keys(data)) {
+					dict[key] = data[key]
+				}
+			}
+		}
+		
+		this.levels = {}
+		this.makeDict(this.levelStore, this.levels)
 		this.levelList = []
 		
-		this.levels = this.cache.json.get('levelData')
 		
 		for(var key in this.levels){
 			this.levelList.push(key)
@@ -190,7 +274,8 @@ class Resources extends Phaser.Scene
 		this.mapData = this.levels[this.levelList[0]]
 		
 //dictionary displaying different towers and their stats
-		this.towers = this.cache.json.get('towerData')
+		this.towers = {}
+		this.makeDict(this.towerStore, this.towers)
 		
 		this.startTowers = []
 		
@@ -201,11 +286,15 @@ class Resources extends Phaser.Scene
 			}
 		}
 		
+		
+		
 //dictionary displaying different bullets and their stats				
-		this.bullets = this.cache.json.get('bulletData')
+		this.bullets = {}
+		this.makeDict(this.bulletStore, this.bullets)
 		
 //dictionary displaying different enemies and their stats
-		this.enemies = this.cache.json.get('enemyData')
+		this.enemies = {}
+		this.makeDict(this.enemyStore, this.enemies)
     }
 	
 	update()

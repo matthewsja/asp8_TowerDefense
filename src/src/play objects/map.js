@@ -72,8 +72,6 @@ class Map extends Phaser.Scene
 				mapLogic.startGame()
 			}
 		})
-		
-		
     }
 	
 	
@@ -102,6 +100,7 @@ class Map extends Phaser.Scene
 //call the function that searches for any enemies that are in a tower's range
 		map.enemyGroup.getChildren().forEach(function(enemy){
 			mapLogic.searchEnemy(enemy)
+			mapLogic.updateHPBar(enemy)
 		})		
 	
 //the function that checks the state of the origin and creates an enemy if the state is the right one
@@ -109,6 +108,8 @@ class Map extends Phaser.Scene
 //the functions that determines how fast the enemies spawn in a wave
 		mapLogic.updateWave()
 		mapLogic.reloadWave()
+		mapLogic.rushWave()
+		
 //between waves there is a timer that counts down until the next wave start, this checks for when the timer is done
 		mapLogic.coolDown()
 		
