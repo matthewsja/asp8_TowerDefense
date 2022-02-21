@@ -1,0 +1,11 @@
+{
+	"tower_3b":{
+		"name":"AOE Tower 2",
+		"image":"tower3b",
+		"bulletKey":"resources.bullets[\"bullet_3\"]",
+		"range":200,
+		"speed":2,
+		"cost":10,
+		"upgradeKey":null
+	}
+}

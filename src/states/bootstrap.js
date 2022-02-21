@@ -47,13 +47,18 @@ export default class Bootstrap extends Phaser.Scene
             this._loaded = true;
         });
 
-        this.load.image('logo', './src/assets/main_logo.png');
+        this.load.image('logo', './src/assets/images/main_logo.png');
         this.audioManager.preload(this.load)
     }
 
     create ()
     {
         this.add.image(400, 250, "logo");
+		
+		this.scene.launch('resources')
+		this.scene.launch('gameRecords')
+		this.scene.launch('mapLogic')
+		this.scene.launch('hudLogic')
     }
 
     update(time, delta) {

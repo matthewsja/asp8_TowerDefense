@@ -1,20 +1,3 @@
-import levelTile from '../assets/level.png';
-
-import one from '../assets/1.png'
-import two from '../assets/2.png'
-import three from '../assets/3.png'
-import four from '../assets/4.png'
-import five from '../assets/5.png'
-
-var tile
-
-var one1;
-var two2;
-var three3;
-var four4;
-var five5;
-
-
 class LevelState extends Phaser.Scene
 {
 	constructor ()
@@ -24,57 +7,113 @@ class LevelState extends Phaser.Scene
 
     preload ()
     {
-        this.load.image('level', levelTile);
-		this.load.image('one', one)
-		this.load.image('two', two)
-		this.load.image('three', three)
-		this.load.image('four', four)
-		this.load.image('five', five)
     }
       
     create ()
-    {
+    {	
 		this.scene.stop('gameStats')
 		this.scene.stop('hud')
 		this.scene.stop('map')
 		
-		var container = this.add.container(400, 300)	
+		var resources = this.scene.get('resources')
+		var gameRecords = this.scene.get('gameRecords')
+		var levelSelect = this.scene.get('level')
 
-      	tile = this.add.tileSprite(0 , 0, 800, 600, 'level')
-		container.add(tile);
+		var back = this.add.image(50, 50, 'left').setInteractive()
 		
-		one1 = this.add.image(50, 50, 'one').setInteractive()
-		two2 = this.add.image(150, 50, 'two').setInteractive()
-		three3 = this.add.image(250, 50, 'three').setInteractive()
-		four4 = this.add.image(350, 50, 'four').setInteractive()
-		five5 = this.add.image(450, 50, 'five').setInteractive()
-		
-		one1.on('pointerdown', function () {
-			console.log('change states1')
+		back.on('pointerdown', function () {
 			this.scene.scene.start('menuState')
 		})
 		
-		two2.on('pointerdown', function () {
-			console.log('change states2')
-			this.scene.scene.start('levelState')
-		})
+		this.title = this.add.text(350, 0, 'Level Select', { font: '32px Arial' })
 		
-		three3.on('pointerdown', function () {
-			console.log('change states3')
-			this.scene.scene.start('playingState')
-		})
+		this.descBox
 		
-		four4.on('pointerdown', function () {
-			console.log('change states4')
-			this.scene.scene.start('completeState')
-		})
+		this.makeButton = function(level, x, y){
+			var levelButton = this.add.image(x, y, resources.levels[level]['selection']['picture']).setInteractive()
+			
+			levelButton.description = resources.levels[level]['selection']['description']
+			
+			this.input.on('pointerover', function(pointer, gameobject){
+				try{
+					 if(this.scene.descBox){
+						this.scene.descBox.destroy()
+					}
+					if(gameobject[0].description){
+						this.scene.descBox = this.scene.add.container(pointer.x + 100, pointer.y)
+						var red = new Phaser.GameObjects.Image(this.scene, 0, 0, 'red')
+						red.displayWidth = 200
+						red.displayHeight = 200
+						this.scene.descBox.add(red, level)
+
+						var desc = gameobject[0].description
+						var config = {fontSize:'18px', color:'#000000', fontFamily: 'Arial'}
+
+//display the description in the little window
+						var displayDesc = new Phaser.GameObjects.Text(
+							this.scene,
+							-90,
+							-90,
+							desc,
+							config
+						)
+
+						this.scene.descBox.add(displayDesc, this.scene)
+					}
+				}
+				catch(err){
+					err
+				}
+				
+				this.scene.input.on('pointerout', function(){
+					if(this.scene.descBox){
+						this.scene.descBox.destroy()
+					}
+				})	
+			})
+			
+			levelButton.on('pointerdown', function(){
+				this.scene.clickButton(level)
+			})
+			
+		}
 		
-		five5.on('pointerdown', function () {
-			console.log('change states5')
-			this.scene.scene.start('overState')
-		})
+		this.levelButtons = function(){
+			for(var i = 0; i < resources.levelList.length; i++){
+				var x
+				var y = 250
+				switch (i){
+					case 0:
+						x = 50
+						break;
+					case 1: 
+						x = 150
+						break;
+					case 2:
+						x = 250
+						break;
+					case 3:
+						x = 350
+						break;
+					case 4:
+						x = 450
+						break;
+					default:
+						console.log('x error')
+						break;
+				}
+				this.makeButton(resources.levelList[i], x, y)		
+			}
+		}
+		
+		this.levelButtons()
+		
+		this.clickButton = function(level){
+			gameRecords.levelSelect = level.toString()
+			resources.mapData = resources.levels[gameRecords.levelSelect]
+			this.scene.start('playingState')		
+		}
     }
-	
 }
 
 export default LevelState

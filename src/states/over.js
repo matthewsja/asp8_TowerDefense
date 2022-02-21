@@ -1,18 +1,4 @@
-import overTile from '../assets/over.png';
-
-import one from '../assets/1.png'
-import two from '../assets/2.png'
-import three from '../assets/3.png'
-import four from '../assets/4.png'
-import five from '../assets/5.png'
-
-var tile
-
-var one1;
-var two2;
-var three3;
-var four4;
-var five5;
+import overTile from '../assets/images/over.png';
 
 class OverState extends Phaser.Scene
 {
@@ -23,12 +9,7 @@ class OverState extends Phaser.Scene
 
     preload ()
     {
-        this.load.image('over', overTile);
-		this.load.image('one', one)
-		this.load.image('two', two)
-		this.load.image('three', three)
-		this.load.image('four', four)
-		this.load.image('five', five)
+		this.load.image('over', overTile)
     }
       
     create ()
@@ -37,41 +18,36 @@ class OverState extends Phaser.Scene
 		this.scene.stop('hud')
 		this.scene.stop('map')
 		
+		var gameRecords = this.scene.get('gameRecords')
 		
-		var container = this.add.container(400, 300)	
-
-      	tile = this.add.tileSprite(0 , 0, 800, 600, 'over')
-		container.add(tile);
+		var score = 'Score: ' + gameRecords.score
+		var topScore = 'Top Score: ' + gameRecords.topScore
 		
-		one1 = this.add.image(50, 50, 'one').setInteractive()
-		two2 = this.add.image(150, 50, 'two').setInteractive()
-		three3 = this.add.image(250, 50, 'three').setInteractive()
-		four4 = this.add.image(350, 50, 'four').setInteractive()
-		five5 = this.add.image(450, 50, 'five').setInteractive()
+		var waves = 'Waves Survived: ' + gameRecords.wavesSurvived
 		
-		one1.on('pointerdown', function () {
-			console.log('change states1')
+		this.endResults = this.add.text(350, 0, 'Game Over \n' + score + '\n' + topScore + '\n' + waves, { font: '32px Arial' })
+		
+		
+		var menu = this.add.image(450, 250, 'menu').setInteractive()
+		menu.displayWidth = 200
+		menu.displayHeight = 100
+		var level = this.add.image(450, 400, 'level').setInteractive()
+		level.displayWidth = 200
+		level.displayHeight = 100
+		var restart = this.add.image(450, 550, 'restart').setInteractive()
+		restart.displayWidth = 200
+		restart.displayHeight = 100
+		
+		menu.on('pointerdown', function () {
 			this.scene.scene.start('menuState')
 		})
 		
-		two2.on('pointerdown', function () {
-			console.log('change states2')
+		level.on('pointerdown', function () {
 			this.scene.scene.start('levelState')
 		})
 		
-		three3.on('pointerdown', function () {
-			console.log('change states3')
+		restart.on('pointerdown', function () {
 			this.scene.scene.start('playingState')
-		})
-		
-		four4.on('pointerdown', function () {
-			console.log('change states4')
-			this.scene.scene.start('completeState')
-		})
-		
-		five5.on('pointerdown', function () {
-			console.log('change states5')
-			this.scene.scene.start('overState')
 		})
     }
 	
