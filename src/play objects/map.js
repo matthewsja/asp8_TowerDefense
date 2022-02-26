@@ -1,31 +1,25 @@
-import ten from '../assets/images/10.png'
-
 class Map extends Phaser.Scene
 {
 
 	constructor ()
     {
         super('map');
-		Phaser.Scene.call(this,{key: 'map'})
     }
 
     preload ()
     {
-		this.load.image('ten', ten)
     }
       
     create ()
     {
-
 //these allow usage of attributes and functions from other scenes
 		var resources = this.scene.get('resources')
 		var map = this.scene.get('map')
 		var mapLogic = this.scene.get('mapLogic')
+		var mapLogicEnemy = this.scene.get('mapLogicEnemy')
 		
 //the group that would contain all the enemies
 		this.enemyGroup = this.add.group()
-		
-
 			
 //the group that would contain all the towers	
 		this.towerGroup = this.add.group()
@@ -39,37 +33,30 @@ class Map extends Phaser.Scene
 //unique id for each tower so they could be identified when needed
 //starts at 1 as 0 could be read as 'false'
 		this.towerID = 1
-
-//a circle for when a tower is clicked on, the detection range for it is drawn
-		this.circle
 		
-//draw the tileset
-//input parameters are the array indicating which tiles go where, the tileset image and a number indicating the size of each tile
-		mapLogic.drawTiles(
-			resources.mapData['map']['tiles'],
-			'tileset',
-			resources.mapData['map']['size']
-		)
+//the code is a bit verbose, this shortens it for later use
+		var mapData = resources.mapData['map']
+//draw the tileset using level specific data
+		mapLogic.drawTiles(mapData['tiles'],mapData['tileset'],mapData['size'])
 				
-//determine the specific path that the enemies would take
-//input parameters are the array indicating which tiles go where, the index of the tile that would be the origin, the index of the tiles that would indicate the destination and the idices of the tiles that the enemies could travel on
+//determine the specific path that the enemies would take using level specific data
 		mapLogic.makePath(
-			resources.mapData['map']['tiles'],
-			resources.mapData['map']['origin'],
-			resources.mapData['map']['dest'],
-			resources.mapData['map']['path'],
-			resources.mapData['map']['size']
+			mapData['tiles'],
+			mapData['origin'],
+			mapData['dest'],
+			mapData['path'],
+			mapData['size']
 		)
 		
-//make the buttons that add enemies
+//create an image that is interactable
 		this.start = this.add.image(150, 650, 'start').setInteractive()
 		
-
-//start the game by calling all the waves of enemies one by one
+//when the image is clicked on, the game starts proper by starting the first wave
+//once the first wave has started, the image becomes different indicating that when clicked on, the game is rushed
 		this.start.on('pointerdown',function(){
 			if(!map.origin.started){
 				map.start = map.add.image(150, 650, 'rush').setInteractive()
-				mapLogic.startGame()
+				mapLogicEnemy.startGame()
 			}
 		})
     }
@@ -80,41 +67,45 @@ class Map extends Phaser.Scene
 		var resources = this.scene.get('resources')
 		var map = this.scene.get('map')
 		var mapLogic = this.scene.get('mapLogic')
-
+		var mapLogicEnemy = this.scene.get('mapLogicEnemy')
+		var mapLogicTower = this.scene.get('mapLogicTower')
 		
-//update the speed of various game objects in case the game speed changes
+//call the function that updates the speed of various game objects in case the game speed changes
 		mapLogic.updateSpeed()
 
-//move the individual bullets or remove them if their target no longer exists
+//call the functions  move the individual bullets or remove them if their target no longer exists
 		map.bulletGroup.getChildren().forEach(function(bullet){
-			mapLogic.moveBullet(bullet)
-			mapLogic.updateBullet(bullet)
+			mapLogicTower.moveBullet(bullet)
+			mapLogicTower.updateBullet(bullet)
 		})
 					
 //call the functions that determine the attack speed of the towers
 		map.towerGroup.getChildren().forEach(function(tower){
-			mapLogic.updateTower(tower)
-			mapLogic.reloadTower(tower)
+			mapLogicTower.updateTower(tower)
+			mapLogicTower.reloadTower(tower)
 		})
 		
-//call the function that searches for any enemies that are in a tower's range
+//call the functions that searches for any enemies that are in a tower's range
 		map.enemyGroup.getChildren().forEach(function(enemy){
-			mapLogic.searchEnemy(enemy)
-			mapLogic.updateHPBar(enemy)
+			mapLogicTower.searchEnemy(enemy)
+			mapLogicEnemy.updateHPBar(enemy)
 		})		
 	
-//the function that checks the state of the origin and creates an enemy if the state is the right one
-		mapLogic.makeEnemy(map.origin.enemy)
-//the functions that determines how fast the enemies spawn in a wave
-		mapLogic.updateWave()
-		mapLogic.reloadWave()
-		mapLogic.rushWave()
+//calls the function that checks the state of the origin and creates an enemy if the state is the right one
+		mapLogicEnemy.makeEnemy(map.origin.enemy)
+//call the functions that determine how fast the enemies spawn in a wave
+		mapLogicEnemy.updateWave()
+		mapLogicEnemy.reloadWave()
 		
-//between waves there is a timer that counts down until the next wave start, this checks for when the timer is done
-		mapLogic.coolDown()
+		
+//call the function that handles the countdown between waves
+//this one checks if the countdown has reached zero
+		mapLogicEnemy.coolDown()
+//this one will call the next next wave when the rush button is clicked on while the countdown is active
+		mapLogicEnemy.rushWave()
 		
 //this function is for when a building site tile is clicked on, it opens up the tower menu in the HUD
-		mapLogic.clickSite()
+		mapLogicTower.clickSite()
 	}
 }
 

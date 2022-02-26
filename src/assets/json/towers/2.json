@@ -3,9 +3,8 @@
 		"name":"Basic Tower 2",
 		"image":"tower1b",
 		"bulletKey":"resources.bullets[\"bullet_1\"]",
-		"range":250,
+		"range":2.5,
 		"speed":3,
-		"cost":7,
-		"upgradeKey":null
+		"cost":7
 	}
 }

@@ -3,7 +3,7 @@
 		"name":"Basic Tower 1",
 		"image":"tower1a",
 		"bulletKey":"resources.bullets[\"bullet_1\"]",
-		"range":200,
+		"range":2,
 		"speed":2,
 		"cost":5,
 		"upgradeKey":"resources.towers[\"tower_1b\"]"

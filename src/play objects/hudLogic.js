@@ -18,356 +18,117 @@ class HUDLogic extends Phaser.Scene
 		var hudLogic = this.scene.get('hudLogic')
 		var map = this.scene.get('map')
 		var mapLogic = this.scene.get('mapLogic')
+		var mapLogicTower = this.scene.get('mapLogicTower')
 		var gameStats = this.scene.get('gameStats')
 		
 //this function helps ensure that the building site tiles could be interacted with correctly by creating an instance of hud.settings with an 'active' attribute
 //this instance is removed instantly but it still remains in the memory
 		this.startHud = function(){
-			var settings = new Phaser.GameObjects.Container(hud, 400, 300)
-			hud.settings = hud.add.existing(settings)
-			settings.active = false
-			settings.destroy()
+			hud.settings = hud.add.container(450, 350)
+			hud.settings.active = false
+			hud.settings.destroy()
 		}
 
-//this function creates the setting window
+//this function creates the setting window which contains buttons to resume the game, restart the game or return to the main menu
 		this.makeSettings = function(){
-//removes any previous versions of the settings window and tower menu if it is active
+//save the delay time of the origin and towers so they can resume their pace upon resuming the game
+			if(map.origin.delay){
+				map.origin.delayTime = map.origin.delay.getRemaining()
+			}
+			map.towerGroup.getChildren().forEach(function(tower){
+				if(tower.delay){
+					tower.delayTime = tower.delay.getRemaining()
+				}
+			})
+			
+
+//remove any previous versions of the settings window and tower menu if it is active
 			mapLogic.removePrev(hud.rec)
 			mapLogic.removePrev(hud.towerMenu)
 			mapLogic.removePrev(hud.settings)
 
-//ensure that everything in the game stops
+//ensure that most elements in the game stop while the menu is active
 			gameStats.isPlaying = false
 			
 //ensure that the speed button is unresponsive while the settings window is active
 			hud.speedButton.disableInteractive()
+//create a rectangle object that covers the entire game window
+//this rectangle is used to give everything a slight tint
 			var rec = new Phaser.GameObjects.Rectangle(hud, -100, -100, 2000, 2000, '0xAA7878', 0.5)
 			hud.rec = hud.add.existing(rec)
 			
 //create the settings container right in the middle of the game window
-			var settings = new Phaser.GameObjects.Container(hud, 400, 300)
+			hud.settings = hud.add.container(450, 350)
+			
 //when this attribute is true, clicking on building sites does nothing
 //when it is false, clicking on them opens up the tower menu
-			settings.active = true
-			hud.settings = hud.add.existing(settings)
+			hud.settings.active = true
 			
-//create a red rectangle from an image that serves as the background of the settings window
+
+//use a red rectangle from the assets that serves as the background of the settings window
 			var red = new Phaser.GameObjects.Image(hud, 0, 0, 'red')
+			hud.settings.add(red)
 			red.displayWidth = 600
 			red.displayHeight = 400
-			settings.add(red, hud)
+			
 			
 //create a resume button that when clicked on will remove the settings window and continue the game
 			var resume = new Phaser.GameObjects.Image(hud, 0, -140, 'resume').setInteractive()
-			settings.add(resume, hud)
-			
+			hud.settings.add(resume)
 			resume.displayWidth = 200
 			resume.displayHeight = 100
 			
 //create a restart button that when clicked on, resets the states of all the objects in the game as well as the stats
 			var restart = new Phaser.GameObjects.Image(hud, 0, -30, 'restart').setInteractive()
-			settings.add(restart, hud)
-			
+			hud.settings.add(restart)
 			restart.displayWidth = 200
 			restart.displayHeight = 100
 			
 //create a main menu button that when clicked on takes the game to the main menu state
 			var menu = new Phaser.GameObjects.Image(hud, 0, 80, 'menu').setInteractive()
-			settings.add(menu, hud)
-			
+			hud.settings.add(menu)
 			menu.displayWidth = 200
 			menu.displayHeight = 100
 
 //the interactivity of the resume button
 			resume.on('pointerdown', function(){
+//set the game to be playing again
 				gameStats.isPlaying = true
 				
-				map.input.manager.enabled = true
-				map.origin.state = 'created'
+//any game elements that are on cooldown are resumed with their action delay intact
+				if(map.origin.state == 'rest'){
+					map.origin.delay = map.time.addEvent({delay: map.origin.delayTime, timeScale: gameStats.playSpeed, loop: false})
+				}
 				map.towerGroup.getChildren().forEach(function(tower){
-					tower.state = 'ready'
+					if(tower.state == 'reload'){
+						tower.delay = map.time.addEvent({delay: tower.delayTime, timeScale: gameStats.playSpeed, loop: false})
+					}
 				})
+//make the speed setting button interactable again
 				hud.speedButton.setInteractive()
+//allow the building sites to be interactable again
+				hud.settings.active = false
+//remove the tint that covered the entire game window
 				rec.destroy()
-				settings.destroy()
-				settings.active = false
+//remove the settings container and everything within it
+				hud.settings.destroy()
 			})
 
 //the interactivity of the restart button
 			restart.on('pointerdown', function () {
-				console.log('change states3')
+//start the play scene again
+//since the hud, gameStats and map scenes are called by this scene, the states of these scenes are reset
 				this.scene.scene.start('playingState')
 			})
 			
 //the interactivity of the main menu button
 			menu.on('pointerdown', function () {
-				console.log('change states1')
+//change the game state to the main menu state
 				this.scene.scene.start('menuState')
 			})
 
 		}
 		
-//function that creates the tower menu
-//the input parameter is the tile that was clicked on which caused the function to be called
-		this.makeTowerMenu = function(tile){
-//if there was a circle surrounding a tower or another tower menu active, remove them
-			mapLogic.removePrev(map.circle)
-			mapLogic.removePrev(hud.towerMenu)
-
-//create a tower menu object and add it to the HUD
-			var towerMenu = new Phaser.GameObjects.Container(hud, 850, 350)
-			hud.towerMenu = hud.add.existing(towerMenu)
-			
-//create a red rectangle that serves as the background of the tower menu
-			var red = new Phaser.GameObjects.Image(hud, 0, 0, 'red')
-			red.displayWidth = 100
-			red.displayHeight = 500
-			towerMenu.add(red, hud)
-			
-//create a cross that when clicked on removes the tower menu
-			var cross = new Phaser.GameObjects.Image(hud, 0, 200, 'cross').setInteractive()
-			cross.displayWidth = 100
-			cross.displayHeight = 100
-			towerMenu.add(cross, hud)
-
-//the interactivity of the cross
-			cross.on('pointerdown', function(){
-				mapLogic.removePrev(map.circle)
-				hud.towerMenu.destroy()
-			})
-			
-//this is used to decide if the buy menu or the stats page is to be displayed
-//it depends on whether the tile is being occupied by a tower at the moment
-//if there is not tower at the tile then the buy menu is displayed
-			if(tile.tower == -1 || !tile.tower){
-				console.log('there is no tower')
-//this is how much money has been spent on the building site, if a tower is bought then this value increases by the cost of the tower bought
-				tile.spent = 0
-//call a function to create the buy menu
-				hudLogic.makeMenuBuy(tile)
-			}
-			else{
-				console.log('there is a tower')
-//if there is a tower then the stats of the occupying tower is displayed
-				hudLogic.makeMenuStats(tile)
-			}	
-		}
-
-//function that displays all the towers that could be bought
-		this.makeMenuBuy = function(tile){
-//iterate through a list of starting towers
-			for(var i = 0; i < resources.startTowers.length; i++){
-				var tower = eval('resources.towers["' + resources.startTowers[i] + '"]')
-//create an image object using the information from the starting tower
-//for each available tower, the image is below the one before it
-				var button = new Phaser.GameObjects.Image(hud, 0, -200 + 100 * i, tower.image).setInteractive()
-//links all the data of that tower to the image
-				button.tower = tower
-//the size of the button
-				button.displayWidth = 100
-				button.displayHeight = 100
-//used to identify that this is a button for buying a tower
-				button.name = 'towerButton'
-				
-//call a function that allows the button to be interacted with
-				hudLogic.clickBuy(button, tile, tower)
-					
-				hud.towerMenu.add(button, hud)				
-			}
-		}
-
-//function that would dim the buy button in the tower menu if the cost of the tower exceeds the amount of money at the moment
-//the button reverts back to normal when there is enough money
-		this.updateTint = function(){
-			if(hud.towerMenu){
-				hud.towerMenu.each(function(button){
-					if(button.name == 'towerButton'){
-						if(gameStats.money < button.tower.cost){
-							button.setTint('0xAA7878')
-						}
-						else{
-							button.clearTint()
-						}
-					}
-				})
-			}
-		}
-
-//function that allows the buy buttons in the tower menu to be interacted with
-//interactions involve hovering the mouse over is and clicking it to buy the tower
-//the input parameters are the button in question, the tile the tower menu is for and the tower the button is for
-		this.clickBuy = function(button, tile, tower){
-			var towerMenu = hud.towerMenu
-//this is for when the mouse is over the button		
-			hud.input.on('pointerover', function(pointer, gameobject){
-				try{
-					if(towerMenu.getByName('buyStats')){
-						towerMenu.getByName('buyStats').destroy()
-					}
-//as input does not allow outside varibles to pass to it, the tower parameters passed onto the button is used
-					var towerStats = gameobject[0].tower
-					var bullet = eval(towerStats.bulletKey)
-					
-					var name = 'name: ' + towerStats.name
-					var damage = 'damage: ' + bullet.damage
-					var range = 'range: ' + towerStats.range
-					var speed = 'speed: ' + towerStats.speed
-					var cost = 'cost: ' + towerStats.cost
-					
-					var desc
-					if(bullet.AOE > 0){
-						var AOE = 'AOE: ' + bullet.AOE
-						desc = name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + AOE + '\n' + cost
-					}
-					else{
-						desc = name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + cost
-					}
-					
-//creates a little window to the left of the mouse which displays the stats of the tower
-					var buyStats = new Phaser.GameObjects.Container(
-						hud,
-						pointer.x - towerMenu.x - 100,
-						pointer.y - towerMenu.y
-					)
-//this allows the targeting of this window so it could be removed when the mouse is no longer over the button
-					buyStats.name = 'buyStats'
-//add the window to the tower menu
-					towerMenu.buyStats = towerMenu.add(buyStats, hud)
-
-//create a red rectangle which serves as the background of the window with the stats
-					var red = new Phaser.GameObjects.Image(hud, 0, 0, 'red')
-					red.displayWidth = 200
-					red.displayHeight = 200
-					buyStats.add(red, hud)
-					
-//the font and typeface of the words to come
-					var config = {fontSize:'18px', color:'#000000', fontFamily: 'Arial'}
-//display the stats in the little window
-					var displayStats = new Phaser.GameObjects.Text(
-						hud,
-						-90,
-						-90,
-						desc,
-						config
-					)
-
-					buyStats.add(displayStats, hud)
-				}
-				catch(err){
-					null
-				}				
-			})
-//when the mouse is no longer over the button, the stats window is removed
-			hud.input.on('pointerout', function(){
-				if(towerMenu.getByName('buyStats')){
-					towerMenu.getByName('buyStats').destroy()
-				}
-			})
-			
-//when the button is clicked on, the amount of money is first checked to make sure there is enough
-//if there is enough, the amount of money spent on the building site increases, the previous tower is removed in the case of an upgraded tower, the tower is made and the amount of money decreases by the cost of the tower
-//the tower menu is also removed
-			button.on('pointerdown', function(){
-				if(gameStats.money >= tower.cost){
-					tile.spent += tower.cost
-					hudLogic.removeTower(tile)
-					mapLogic.makeTower(tile, tower, resources.mapData['map']['size'])
-					hud.towerMenu.destroy()
-					console.log(tower.name + ' made')
-					gameStats.money -= tower.cost
-				}
-//if there is not enough money
-				else{
-					console.log('not enough money')
-				}
-			})
-		}
-		
-				
-//this function is to show the stats of the tower in the building site that was clicked on
-		this.makeMenuStats = function(tile){
-//create a button that when clicked on will sell the tower
-			var sell = new Phaser.GameObjects.Image(hud, 0, 100, 'sell').setInteractive()
-			sell.displayWidth = 100
-			sell.displayHeight = 100
-
-//the interactivity of the sell tower button
-			sell.on('pointerdown', function(){
-				gameStats.money += Math.floor(tile.spent * 0.7)
-				tile.spent = 0
-				hudLogic.removeTower(tile)
-				console.log('tower removed')
-				hud.towerMenu.destroy()
-			})
-			
-			hud.towerMenu.add(sell, hud)
-			
-//try to find the tower in the tower group using the tower id value of the tile
-			var id = tile.tower
-			var tower
-			
-//search the tower group and when there is a match use it to get the tower's stats
-			map.towerGroup.getChildren().forEach(function(towerTemp){
-				if(towerTemp.id == id){
-					tower = towerTemp
-				}
-			})
-
-//get the stats of the tower
-			var bullet = eval(tower.bulletKey)
-			
-			var name = ('name: ' + tower.name)
-			var damage = ('damage: ' + bullet.damage)
-			var range = ('range: ' + tower.range)		
-			var speed = ('speed: ' + tower.speedMaster)
-
-//the font and typeface of the words to come
-			var config = {fontSize:'12px', color:'#000000', fontFamily: 'Arial'}
-//display the stats of the tower
-			var displayStats = new Phaser.GameObjects.Text(
-				hud,
-				-40,
-				-225,
-				name + '\n' + damage+ '\n' + range + '\n' + speed,
-				config
-			)
-			hud.towerMenu.add(displayStats, hud)
-
-//see whether there is an upgrade for the tower
-			var upgrade = eval(tower.upgradeKey)
-
-//if there is an upgrade, create an upgrade button that works the same as a buy tower button
-			if(upgrade){
-				var upgradeButton = new Phaser.GameObjects.Image(hud, 0, 0, upgrade.image).setInteractive()
-				
-				upgradeButton.tower = upgrade
-				upgradeButton.displayWidth = 100
-				upgradeButton.displayHeight = 100
-				upgradeButton.name = 'towerButton'
-				
-				hudLogic.clickBuy(upgradeButton, tile, upgrade)
-				hud.towerMenu.add(upgradeButton, hud)
-			}
-//when a tower is clicked on, a circle appears around the tower showing its attack range
-			mapLogic.clickTower(tower)
-		}
-		
-		
-//this the function for removing a tower from a building site
-		this.removeTower = function(tile){
-//find the tower in question in the tower group and remove it from the list
-			map.towerGroup.getChildren().forEach(function(tower){
-				if(tower.id == tile.tower){
-					mapLogic.removePrev(tower)
-				}
-			})
-//set the id of the tower in the tile to 0 which is read as 'false' in Javascript
-			tile.tower = 0
-//if there is a circle showing attack range, remove that too
-			mapLogic.removePrev(map.circle)
-			
-		}
-
 //function for when the speed button is clicked on
 		this.changeSpeed = function(){
 //uses a switch as the options are discrete
@@ -375,24 +136,45 @@ class HUDLogic extends Phaser.Scene
 //these just draw the buttons and change the settings, they are not interactive yet
 			switch(gameStats.speedSetting){
 				case 1:
+//manually change the speed setting
 					gameStats.speedSetting = 2
+//change the button to fit the new setting
 					hud.speedButton  = hud.add.image(50, 650, 'arrow2').setInteractive()
-
 					break;
 				case 2:
+//manually change the speed setting
 					gameStats.speedSetting = 3
+//change the button to fit the new setting
 					hud.speedButton  = hud.add.image(50, 650, 'arrow3').setInteractive()
 					break;
 				case 3:
+//manually change the speed setting
 					gameStats.speedSetting = 0
+//change the button to fit the new setting
 					hud.speedButton  = hud.add.image(50, 650, 'pause').setInteractive()
+//save the delay time of the origin and towers so they can resume their pace upon resuming the game
+					if(map.origin.delay){
+						map.origin.delayTime = map.origin.delay.getRemaining()
+					}
+					map.towerGroup.getChildren().forEach(function(tower){
+						if(tower.delay){
+							tower.delayTime = tower.delay.getRemaining()
+						}
+					})
 					break;
 				case 0:
+//manually change the speed setting
 					gameStats.speedSetting = 1
+//change the button to fit the new setting
 					hud.speedButton  = hud.add.image(50, 650, 'arrow1').setInteractive()
-					map.origin.state = 'created'
+//any game elements that are on cooldown are resumed with their action delay intact
+					if(map.origin.state == 'rest'){
+						map.origin.delay = map.time.addEvent({delay: map.origin.delayTime, timeScale: gameStats.playSpeed, loop: false})
+					}
 					map.towerGroup.getChildren().forEach(function(tower){
-						tower.state = 'ready'
+						if(tower.state == 'reload'){
+							tower.delay = map.time.addEvent({delay: tower.delayTime, timeScale: gameStats.playSpeed, loop: false})
+						}
 					})
 					break;
 					
@@ -400,6 +182,7 @@ class HUDLogic extends Phaser.Scene
 					break
 			}
 //the interactivity of the buttons
+//the buttons were made but don't have specific interactivity assigned to them yet, this adds them
 			hud.speedButton.on('pointerdown', function(){
 				hudLogic.changeSpeed()
 				mapLogic.updateSpeed()
@@ -408,23 +191,23 @@ class HUDLogic extends Phaser.Scene
 
 //display the stats of the current playthrough
 		this.showStats = function(){
-//get the stats from the gameStats scene
+//strings that will contain the stats from the gameStats scene
 			var wave = 'wave: ' + (map.origin.waveCounter+1)
 			var lives = 'lives: ' + gameStats.lives
 			var money = 'money: ' + gameStats.money
 			var score = 'score: ' + gameStats.score
 
-//remove any previous iterations of the display of these stats so the current version won't overlap with previous ones
+//remove any previous iterations of the displayed stats so the current version won't overlap with previous ones
 			mapLogic.removePrev(hud.wave)
 			mapLogic.removePrev(hud.gameStats)
 
-//display the stats
+//display the current wave number
 			hud.wave = hud.add.text(200, 610, wave, {font: '32px Arial'})
+//display the stats
 			hud.gameStats = hud.add.text(200, 640, lives + ' ' + money + ' ' + score, { font: '32px Arial' })
+//set the colour of the displayed text to white
 			hud.wave.setTint(0xFFFFFF);
 			hud.gameStats.setTint(0xFFFFFF);
-
-
 		}
 		
 //this function displays the timer for when a wave is finished and there is a pause between waves
@@ -435,8 +218,9 @@ class HUDLogic extends Phaser.Scene
 			if(map.origin.coolDown){
 //if the timer is active, get the amount of time left in seconds and display it
 				var timer = map.origin.coolDown
+//make the string that will be displayed using the number of seconds left for the countdown
 				var remaining = 'time left: ' + Math.ceil(timer.getRemainingSeconds())
-				
+//display the string and make it white
 				hud.timerText = hud.add.text(200, 670, remaining, {font: '32px Arial'})
 				hud.timerText.setTint(0xFFFFFF)
 			}
