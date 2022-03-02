@@ -22,6 +22,13 @@ class CompleteState extends Phaser.Scene
 		
 		var lives = 'Lives Left: ' + gameRecords.lives
 		
+		// below one line added by XYu on Mar2, just a trial: 
+		// create a background picture for level-completion
+		// this.level_completion = this.add.image(450, 350, 'level_completion')
+		// level_completion.displayWidth = 900
+		// level_completion.displayHeight = 700
+		//////////////////////////////////////////////////////
+
 		this.endResults = this.add.text(350, 0, 'Level Complete \n' + score + '\n' + topScore + '\n' + lives, { font: '32px Arial' })
 		
 		var menu = this.add.image(450, 200, 'menu').setInteractive()
