@@ -148,6 +148,17 @@ class Resources extends Phaser.Scene
 				fileType: 'image',
 				path:'src/assets/images/rush.png'
 			},
+			// below several are added by XYu on Mar2: 
+			'level_completion':{
+				fileType: 'image',
+				path:'src/assets/images/level_completion.png'
+			}, 
+			'background_jungle':{
+				fileType: 'image',
+				path:'src/assets/images/background_jungle.png'
+			}, 
+
+			////////////////////////////////////////////////////////
 			'bulletD1':{
 				fileType: 'json',
 				dataType: 'bullet',
