@@ -56,9 +56,13 @@ export default class Bootstrap extends Phaser.Scene
         this.add.image(400, 250, "logo");
 		
 		this.scene.launch('resources')
+		this.scene.launch('checkJSON')
 		this.scene.launch('gameRecords')
 		this.scene.launch('mapLogic')
+		this.scene.launch('mapLogicEnemy')
+		this.scene.launch('mapLogicTower')
 		this.scene.launch('hudLogic')
+		this.scene.launch('hudLogicTower')
     }
 
     update(time, delta) {

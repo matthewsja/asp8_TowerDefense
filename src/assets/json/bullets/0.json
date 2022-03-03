@@ -1,0 +1,9 @@
+{
+	"bullet_0":{
+		"image":"bullet1",
+		"size":[25,25],
+		"speed":750,
+		"damage":1,
+		"AOE":0
+	}
+}
