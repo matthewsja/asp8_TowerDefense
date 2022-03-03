@@ -3,9 +3,8 @@
 		"name":"Sniper Tower 2",
 		"image":"tower2b",
 		"bulletKey":"resources.bullets[\"bullet_2\"]",
-		"range":350,
+		"range":3.5,
 		"speed":1.5,
-		"cost":10,
-		"upgradeKey":null
+		"cost":10
 	}
 }

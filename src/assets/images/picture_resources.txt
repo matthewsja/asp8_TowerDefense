@@ -1,0 +1,65 @@
+
+
+enemy1: saw
+enemy2: gun
+
+
+tower1: poison frog
+tower2: tiger
+tower3: piranha
+tower4: king cobra
+
+
+
+---------------------------------
+
+poison frogs: 
+https://static.vecteezy.com/system/resources/previews/000/090/393/original/poison-frog-vectors.jpg
+
+
+tiger: 
+https://i.pinimg.com/736x/0c/ba/ac/0cbaac3233163772131f88c587b856f2.jpg
+
+https://img.clipartlook.com/tiger-face-tiger-head-tiger-face-clip-art-1300_1300.jpg
+
+
+lion: 
+https://image.freepik.com/free-vector/cartoon-lion-roaring-isolated-white-background_29190-634.jpg
+
+
+saw: 
+https://webstockreview.net/images/chainsaw-clipart-8.jpg
+https://freesvg.org/img/motosega.png
+
+
+gun: 
+https://www.goodfreephotos.com/albums/vector-images/rifle-cartoon-vector-file.png
+
+
+piranha: 
+https://cdn5.vectorstock.com/i/1000x1000/63/09/angry-piranha-cartoon-vector-21306309.jpg
+https://media.istockphoto.com/vectors/hungry-piranha-vector-illustration-eps-vector-id967674438?k=6&m=967674438&s=170667a&w=0&h=BvJqaxcxIAIRq2FzcLwrstQLG_AE1YofFNkAjjg-efU=
+https://cdn2.vectorstock.com/i/1000x1000/22/36/piranha-cartoon-vector-742236.jpg
+https://thumbs.dreamstime.com/z/angry-cartoon-piranha-illustration-expression-47413048.jpg
+https://clipground.com/images/piranha-cartoon-clipart-5.jpg 
+
+law: 
+https://image.freepik.com/free-vector/background-with-advocacy-elements_23-2147802094.jpg
+https://cdn2.vectorstock.com/i/1000x1000/81/71/judge-gavel-and-law-books-vector-328171.jpg 
+
+
+jaguar: 
+https://media.istockphoto.com/vectors/leaping-jaguar-vector-id973770780?k=6&m=973770780&s=170667a&w=0&h=nfZYDy5RQZE6WssLD1y-52CkEYPHDhVV4ECM42rYRFo=
+https://media.istockphoto.com/vectors/cartoon-animals-for-kids-little-baby-jaguar-smiles-vector-id547246060
+
+king cobra: 
+https://media.istockphoto.com/vectors/cobra-snake-mascot-vector-id630008850?k=6&m=630008850&s=612x612&w=0&h=wtfHSvTDnSTJG9vb-Taq2-g1H2P8a4IGab1S8PBNzB8=
+https://images.all-free-download.com/images/graphiclarge/elements_of_funny_cartoon_cobra_vector_520924.jpg
+
+
+main picture animals and human together: 
+https://cdn3.vectorstock.com/i/1000x1000/94/22/wild-animals-together-in-the-field-vector-11159422.jpg
+http://www.bizhizu.com/download/7859-0-0x0.html
+
+jungle: 
+http://www.bizhizu.com/download/7859-0-0x0.html 

@@ -12,14 +12,13 @@ class PlayingState extends Phaser.Scene
       
     create ()
     {
+//start the scenes that make up the game itself
+//the code to get multiple scenes running at once is from http://phaser.io/examples/v3/view/scenes/launch-parallel-scene#
+		this.scene.launch('gameStats')
 		this.scene.launch('map')
 		this.scene.launch('hud')
-		this.scene.launch('gameStats')
+		
     }
-	
-	update()
-	{	
-	}
 }
 
 export default PlayingState
