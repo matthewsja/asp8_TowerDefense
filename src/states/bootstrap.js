@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import AudioManager, { MUSIC } from '../audiomanager/audioManager.js';
+import AudioManager, { MUSIC } from '../audiomanager/audioManager.mjs';
 
 const MIN_DISPLAY_TIME = 2000; // in milliseconds
 
