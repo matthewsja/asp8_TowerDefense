@@ -138,7 +138,7 @@ class Resources extends Phaser.Scene
 				fileType: 'image',
 				path:'src/assets/images/rush.png'
 			},
-			
+			///////////////////////////////////////////////////////////////////////
 			// below several are added by XYu on Mar2: 
 			'level_completion':{
 				fileType: 'image',
@@ -148,8 +148,20 @@ class Resources extends Phaser.Scene
 				fileType: 'image', 
 				path:'src/assets/images/background_jungle.png'
 			}, 
+			'jungle02':{
+				fileType: 'image', 
+				path:'src/assets/images/jungle02.png'
+			}, 
+			'treasure_bg':{
+				fileType: 'image', 
+				path:'src/assets/images/treasure_box_full.png'
+			},   //added Mar 5
+			'embrace_bg':{
+				fileType: 'image', 
+				path:'src/assets/images/embrace_full.png'
+			},
 
-			////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////
 
 
 //the dictionary of the keys and expected value types that the main data files should contain
