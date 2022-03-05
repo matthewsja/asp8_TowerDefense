@@ -45,7 +45,7 @@ class MenuState extends Phaser.Scene
 //code to change scenes from https://www.thepolyglotdeveloper.com/2020/09/switch-between-scenes-phaser-game/
 		start.on('pointerdown', function () {
 			// Please debug using the below sentence. Try change it btw 'levelState' and 'treasureState'! 
-			this.scene.scene.start('levelState');  //changed by XYu Mar5. Jump to treasure page / level page. 
+			this.scene.scene.start('treasureState');  //changed by XYu Mar5. Jump to treasure page / level page. 
 			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
     }

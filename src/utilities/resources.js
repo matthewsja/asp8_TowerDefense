@@ -160,6 +160,10 @@ class Resources extends Phaser.Scene
 				fileType: 'image', 
 				path:'src/assets/images/embrace_full.png'
 			},
+			'level_selection_bar':{
+				fileType: 'image', 
+				path:'src/assets/images/level_selection.png'
+			},
 
 			////////////////////////////////////////////////////////////////////////
 

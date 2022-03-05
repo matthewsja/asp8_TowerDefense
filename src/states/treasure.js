@@ -13,7 +13,7 @@ class TreasureState extends Phaser.Scene
 
     preload ()
     {
-        this.load.image(450, 350, 'treasure_bg') 
+        //this.load.image(450, 350, 'treasure_bg') 
         // try{
         //     this.load.image(450, 350, 'treasure_bg') 
         // }
@@ -39,9 +39,9 @@ class TreasureState extends Phaser.Scene
 
             
             //create an image that does something when clicked on
-            var startButton = this.add.image(450, 350, 'start').setInteractive()
+            var startButton = this.add.image(600, 620, 'start').setInteractive()
             startButton.displayWidth = 150
-            startButton.displayHeight = 100 
+            startButton.displayHeight = 120 
 
             //when the image is clicked on, the scene changes to the 'levelState' scene
             //code to change scenes from https://www.thepolyglotdeveloper.com/2020/09/switch-between-scenes-phaser-game/
@@ -53,11 +53,14 @@ class TreasureState extends Phaser.Scene
         catch(err){
             logMyErrors(err)
         }
-        finally{
-            var startButton = this.add.image(450, 350, 'start').setInteractive()
-            startButton.displayWidth = 150
-            startButton.displayHeight = 100 
-        }
+        
+        //creates 'back' button: 
+		var back = this.add.image(50, 50, 'left').setInteractive()
+        //when the image is clicked on the game would be the menu state
+        back.on('pointerdown', function () {
+            this.scene.scene.start('menuState')
+        })
+
     }
 	
 }
