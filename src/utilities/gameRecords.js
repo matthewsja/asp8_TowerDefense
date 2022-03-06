@@ -25,6 +25,8 @@ class GameRecords extends Phaser.Scene
 		this.score
 //this records the highest score the player has attained during the current game session
 		this.topScore = 0
+// this will record if the user won via the Law (instant win) tower.
+		this.instantWin = false;
 		
 //this function updates the top score by comparing it to the current score
 //if the current score is higher, then the top score is changed to the value of the current score

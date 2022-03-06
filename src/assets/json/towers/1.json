@@ -6,6 +6,7 @@
 		"range":2,
 		"speed":2,
 		"cost":5,
-		"upgradeKey":"resources.towers[\"tower_1b\"]"
+		"upgradeKey":"resources.towers[\"tower_1b\"]",
+		"instantWin": false
 	}
 }

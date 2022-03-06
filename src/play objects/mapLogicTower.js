@@ -69,7 +69,9 @@ class MapLogicTower extends Phaser.Scene
 //the key of the bullet that the tower fires
 			tower.bulletKey = key['bulletKey']
 //the parameters of the tower this tower could be upgraded to
-			tower.upgradeKey = key['upgradeKey']
+			tower.upgradeKey = key['upgradeKey'];
+
+			tower.instantWin = key['instantWin'];
 			
 //enable physics for the tower so it may detect enemies
 			map.physics.world.enable(tower);
@@ -185,6 +187,12 @@ class MapLogicTower extends Phaser.Scene
 //function for regulating the attack speed of the tower
 //takes in as a parameter the tower being affected
 		this.updateTower = function(tower){
+			if (tower.instantWin) {
+				var gameRecords = this.scene.get('gameRecords');
+				gameRecords.instantWin = true;
+				this.scene.start('completeState');
+				console.log('finished');
+			}
 //if the tower has recently fired, then immediately change the state of the tower to that of reloading and start a delay event that when finished will change the state of the tower to being ready to fire again
 			if(tower.state == 'firing'){
 				tower.state = 'reload'

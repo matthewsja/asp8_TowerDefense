@@ -5,6 +5,7 @@
 		"bulletKey":"resources.bullets[\"bullet_3\"]",
 		"range":2,
 		"speed":2,
-		"cost":10
+		"cost":10,
+		"instantWin": false
 	}
 }

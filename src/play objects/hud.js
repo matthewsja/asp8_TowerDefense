@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class HUD extends Phaser.Scene
 {
 	constructor ()
@@ -27,7 +29,8 @@ class HUD extends Phaser.Scene
 
 //when the circle is clicked on, the function that makes the settings is called
 		this.circle.on('pointerdown', function(){
-			hudLogic.makeSettings()
+			hudLogic.makeSettings();
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 		
 //create the speed button at the bottom left of the game window
@@ -35,8 +38,9 @@ class HUD extends Phaser.Scene
 		
 //when the speed button is clicked on, the speed of the game changes
 		this.speedButton.on('pointerdown', function(){
-			hudLogic.changeSpeed()
-			mapLogic.updateSpeed()
+			hudLogic.changeSpeed();
+			mapLogic.updateSpeed();
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})	
     }
 	

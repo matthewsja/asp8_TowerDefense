@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class MapLogicEnemy extends Phaser.Scene
 {
 	constructor ()
@@ -167,7 +169,8 @@ class MapLogicEnemy extends Phaser.Scene
 //when the countdown is active and the button is clicked, the function to call the next wave is called
 			map.start.on('pointerdown', function(){
 				if(map.origin.coolDown){
-					mapLogic.callNextWave()
+					mapLogic.callNextWave();
+					AudioManager.playEffect(SFX.BUTTON_CLICK);
 				}
 			})
 		}
