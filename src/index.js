@@ -11,11 +11,14 @@ import GameRecords from './utilities/gameRecords.js'
 //import the state scene classes
 //these are the scenes that would be displayed when the game's state changes
 import Bootstrap from './states/bootstrap.js'
-import MenuState from './states/menu.js';
-import LevelState from './states/level.js';
-import PlayState from'./states/play.js'
-import CompleteState from'./states/complete.js'
-import OverState from'./states/over.js'
+import MenuState from './states/menu.js'
+import LevelState from './states/level.js'
+import PlayState from './states/play.js'
+import CompleteState from './states/complete.js'
+import OverState from './states/over.js'; 
+import TreasureState from './states/treasure.js'  //added by XYu Mar 5
+
+
 
 //import the play scene classes
 //these are the scenes that would be used when the game is in the play state
@@ -53,6 +56,7 @@ const config = {
 		CompleteState, 
 		PlayState, 
 		OverState, 
+		TreasureState, 
 		Map, 
 		MapLogic, 
 		MapLogicEnemy, 

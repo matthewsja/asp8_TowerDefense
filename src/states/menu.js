@@ -37,14 +37,15 @@ class MenuState extends Phaser.Scene
 		// commented out by XYu on Mar3. 
 
 //create an image that does something when clicked on
-		var start = this.add.image(450, 480, 'start').setInteractive()
+		var start = this.add.image(450, 620, 'start').setInteractive()
 		start.displayWidth = 200
-		start.displayHeight = 200  
+		start.displayHeight = 160  
 
-//when the image is clicked on, the scene changes to the 'levelState' scene
+//when the image is clicked on, the scene changes to the 'treasureState' scene
 //code to change scenes from https://www.thepolyglotdeveloper.com/2020/09/switch-between-scenes-phaser-game/
 		start.on('pointerdown', function () {
-			this.scene.scene.start('levelState');
+			// Please debug using the below sentence. Try change it btw 'levelState' and 'treasureState'! 
+			this.scene.scene.start('treasureState');  //changed by XYu Mar5. Jump to treasure page / level page. 
 			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
     }

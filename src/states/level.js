@@ -17,6 +17,10 @@ class LevelState extends Phaser.Scene
 		this.scene.stop('hud')
 		this.scene.stop('map')
 		
+		// The title, added by XYu Mar5: 
+		this.bar = this.add.image(450, 100, 'level_selection_bar')
+		//////////////////////////////
+
 //these allow usage of attributes and functions from other scenes
 		var resources = this.scene.get('resources')
 		var gameRecords = this.scene.get('gameRecords')
@@ -26,11 +30,11 @@ class LevelState extends Phaser.Scene
 		var back = this.add.image(50, 50, 'left').setInteractive()
 //when the image is clicked on the game would be the menu state
 		back.on('pointerdown', function () {
-			this.scene.scene.start('menuState')
-		})
+			this.scene.scene.start('treasureState')
+		}) 
 		
 //the title of the scene
-		this.title = this.add.text(350, 0, 'Level Select', { font: '32px Arial' })
+		// this.title = this.add.text(350, 0, 'Level Select', { font: '32px Arial' })
 		
 //adds a description box, would be used and populated later
 		this.descBox
@@ -44,21 +48,21 @@ class LevelState extends Phaser.Scene
 				var y = 250
 //the x position of the button depends on the index in the for loop
 //so far, this only accommodates five levels
-				switch (i){
+				switch (i){  // XYu has changed these values Mar 5
 					case 0:
-						x = 50
+						x = 100
 						break;
 					case 1: 
-						x = 150
-						break;
-					case 2:
 						x = 250
 						break;
+					case 2:
+						x = 400
+						break;
 					case 3:
-						x = 350
+						x = 550
 						break;
 					case 4:
-						x = 450
+						x = 700
 						break;
 					default:
 						console.log('x error')
