@@ -36,6 +36,10 @@ class Resources extends Phaser.Scene
 				fileType: 'image',
 				path:'src/assets/images/tower3a.png'
 			},
+			'tower5a': {
+				fileType: 'image',
+				path:'src/assets/images/tower5a.png'
+			},
 
 			'tower1b':  {
 				fileType: 'image',
@@ -227,6 +231,11 @@ class Resources extends Phaser.Scene
 				fileType: 'json',
 				dataType: 'tower',
 				path:'src/assets/json/towers/6.json'
+			},
+			'towerD7':{
+				fileType: 'json',
+				dataType: 'tower',
+				path:'src/assets/json/towers/7.json'
 			},
 		
 //these are the files of the enemies that would try to head towards the destination and the player has to defend against

@@ -17,7 +17,10 @@ class PlayingState extends Phaser.Scene
 		this.scene.launch('gameStats')
 		this.scene.launch('map')
 		this.scene.launch('hud')
-		
+		var gameRecords = this.scene.get('gameRecords');
+
+        // reset any previous value set to the instant win object.
+        gameRecords.instantWin = false;
     }
 }
 
