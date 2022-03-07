@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class HUDLogic extends Phaser.Scene
 {
 	constructor ()
@@ -111,20 +113,23 @@ class HUDLogic extends Phaser.Scene
 //remove the tint that covered the entire game window
 				rec.destroy()
 //remove the settings container and everything within it
-				hud.settings.destroy()
+				hud.settings.destroy();
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 
 //the interactivity of the restart button
 			restart.on('pointerdown', function () {
 //start the play scene again
 //since the hud, gameStats and map scenes are called by this scene, the states of these scenes are reset
-				this.scene.scene.start('playingState')
+				this.scene.scene.start('playingState');
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 			
 //the interactivity of the main menu button
 			menu.on('pointerdown', function () {
 //change the game state to the main menu state
-				this.scene.scene.start('menuState')
+				this.scene.scene.start('menuState');
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 
 		}
@@ -184,8 +189,9 @@ class HUDLogic extends Phaser.Scene
 //the interactivity of the buttons
 //the buttons were made but don't have specific interactivity assigned to them yet, this adds them
 			hud.speedButton.on('pointerdown', function(){
-				hudLogic.changeSpeed()
-				mapLogic.updateSpeed()
+				hudLogic.changeSpeed();
+				mapLogic.updateSpeed();
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 		}
 

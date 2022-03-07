@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class OverState extends Phaser.Scene
 {
 	constructor ()
@@ -44,15 +46,18 @@ class OverState extends Phaser.Scene
 //when these images are clicked on, the scene of the game changes depending on which one was clicked
 //this takes the game to the main menu scene		
 		menu.on('pointerdown', function () {
-			this.scene.scene.start('menuState')
+			this.scene.scene.start('menuState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 //this takes the game to the level select scene		
 		level.on('pointerdown', function () {
-			this.scene.scene.start('levelState')
+			this.scene.scene.start('levelState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
 //this takes the game to the play scene with the previously set level data		
 		restart.on('pointerdown', function () {
-			this.scene.scene.start('playingState')
+			this.scene.scene.start('playingState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		})
     }	
 }

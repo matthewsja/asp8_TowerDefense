@@ -1,0 +1,11 @@
+{
+	"tower_5a":{
+		"name":"Law",
+		"image":"tower5a",
+		"bulletKey":"resources.bullets[\"bullet_3\"]",
+		"range":2,
+		"speed":2,
+		"cost":20,
+		"instantWin": true
+	}
+}

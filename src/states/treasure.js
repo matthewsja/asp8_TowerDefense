@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager';
+
 ////////////////////////////////////////////////////////////////////////////
 //  The Treasure box containing: towers, and enemies. 
 //  Added by XYu on Mar 5
@@ -58,7 +60,8 @@ class TreasureState extends Phaser.Scene
 		var back = this.add.image(50, 50, 'left').setInteractive()
         //when the image is clicked on the game would be the menu state
         back.on('pointerdown', function () {
-            this.scene.scene.start('menuState')
+            this.scene.scene.start('menuState');
+            AudioManager.playEffect(SFX.BUTTON_CLICK);
         })
 
     }

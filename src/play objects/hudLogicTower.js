@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class HUDLogicTower extends Phaser.Scene
 {
 	constructor ()
@@ -47,7 +49,8 @@ class HUDLogicTower extends Phaser.Scene
 			cross.on('pointerdown', function(){
 //when the cross is clicked on, the tower menu and circle surrounding the tower are removed
 				mapLogic.removePrev(map.circle)
-				hud.towerMenu.destroy()
+				hud.towerMenu.destroy();
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 			
 //this is used to decide if the buy menu or the stats page is to be displayed
@@ -137,7 +140,7 @@ class HUDLogicTower extends Phaser.Scene
 					var damage = 'damage: ' + bullet.damage
 					var range = 'range: ' + towerStats.range
 					var speed = 'speed: ' + towerStats.speed
-					var cost = 'cost: ' + towerStats.cost
+					var cost = 'cost: ' + towerStats.cost;
 					
 //variable that will contain the string to display the tower's stats
 					var desc
@@ -148,8 +151,14 @@ class HUDLogicTower extends Phaser.Scene
 						var AOE = 'AOE: ' + bullet.AOE
 						desc = name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + AOE + '\n' + cost
 					}
-					else{
+					else {
 						desc = name + '\n' + damage+ '\n' + range + '\n' + speed + '\n' + cost
+					}
+
+// if this tower has instant Win enabled (Law), display this.
+					if (towerStats.instantWin == true)
+					{
+						desc = name + '\n' + "Instant Win\n" + cost;
 					}
 					
 //creates a little window to the left of the mouse which displays the stats of the tower
@@ -207,7 +216,8 @@ class HUDLogicTower extends Phaser.Scene
 					mapLogicTower.makeTower(tile, tower, resources.mapData['map']['size'])
 					hud.towerMenu.destroy()
 					console.log(tower.name + ' made')
-					gameStats.money -= tower.cost
+					gameStats.money -= tower.cost;
+					AudioManager.playEffect(SFX.BUTTON_CLICK);
 				}
 //if there is not enough money, then send a message to the console
 				else{
@@ -233,7 +243,8 @@ class HUDLogicTower extends Phaser.Scene
 				tile.spent = 0
 				hudLogicTower.removeTower(tile)
 				console.log('tower removed')
-				hud.towerMenu.destroy()
+				hud.towerMenu.destroy();
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 //add the sell button to the tower menu
 			hud.towerMenu.add(sell, hud)

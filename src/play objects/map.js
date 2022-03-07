@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class Map extends Phaser.Scene
 {
 
@@ -56,7 +58,8 @@ class Map extends Phaser.Scene
 		this.start.on('pointerdown',function(){
 			if(!map.origin.started){
 				map.start = map.add.image(150, 650, 'rush').setInteractive()
-				mapLogicEnemy.startGame()
+				mapLogicEnemy.startGame();
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			}
 		})
     }

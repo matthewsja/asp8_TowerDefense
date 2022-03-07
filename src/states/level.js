@@ -1,3 +1,5 @@
+import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
+
 class LevelState extends Phaser.Scene
 {
 	constructor ()
@@ -30,7 +32,8 @@ class LevelState extends Phaser.Scene
 		var back = this.add.image(50, 50, 'left').setInteractive()
 //when the image is clicked on the game would be the menu state
 		back.on('pointerdown', function () {
-			this.scene.scene.start('treasureState')
+			this.scene.scene.start('treasureState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);
 		}) 
 		
 //the title of the scene
@@ -133,20 +136,22 @@ class LevelState extends Phaser.Scene
 			})
 //when the image is clicked on, a function is called with the name of the level being passed to it
 			levelButton.on('pointerdown', function(){
-				this.scene.clickButton(level)
+				this.scene.clickButton(level);
+				AudioManager.playEffect(SFX.BUTTON_CLICK);
 			})
 			
 		}
 		
 //function to handle what happens when a level button is clicked on
 //takes in as a parameter the name of the level
-		this.clickButton = function(level){
+		this.clickButton = function(level) {
 //sets the value of the selected level in gameRecords to the name of this level
-			gameRecords.levelSelect = level.toString()
+			gameRecords.levelSelect = level.toString();
 //finds the level in resources based on the name and sets the current level to it
-			resources.mapData = resources.levels[gameRecords.levelSelect]
+			resources.mapData = resources.levels[gameRecords.levelSelect];
 //changes the scene to the playingStats scene
-			this.scene.start('playingState')		
+			this.scene.start('playingState');
+			AudioManager.playEffect(SFX.BUTTON_CLICK);	
 		}
 		
 //call the function to make the level buttons
