@@ -1,6 +1,6 @@
 {
 	"tower_2b":{
-		"name":"Sniper Tower 2",
+		"name":"Tiger (upgraded)",
 		"image":"tower2b",
 		"bulletKey":"resources.bullets[\"bullet_2\"]",
 		"range":3.5,

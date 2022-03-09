@@ -1,3 +1,6 @@
+// This is the Playing page where maps, towers and enemies are reacting.  
+/////////////////////////////////////////////////////////////
+
 class PlayingState extends Phaser.Scene
 {
 	constructor ()

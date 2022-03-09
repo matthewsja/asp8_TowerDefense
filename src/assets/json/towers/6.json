@@ -1,6 +1,6 @@
 {
 	"tower_3b":{
-		"name":"AOE Tower 2",
+		"name":"Piranha (upgraded)",
 		"image":"tower3b",
 		"bulletKey":"resources.bullets[\"bullet_3\"]",
 		"range":2,

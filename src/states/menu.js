@@ -1,3 +1,6 @@
+// This is the Menu page, which shows the introduction. 
+/////////////////////////////////////////////////////////////
+
 import AudioManager, { SFX } from '../audiomanager/audioManager';
 
 import testTile from '../assets/images/menu.png';

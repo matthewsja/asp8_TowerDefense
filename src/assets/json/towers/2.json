@@ -1,6 +1,6 @@
 {
 	"tower_1b":{
-		"name":"Basic Tower 2",
+		"name":"Poison Frog (upgraded)",
 		"image":"tower1b",
 		"bulletKey":"resources.bullets[\"bullet_1\"]",
 		"range":2.5,
