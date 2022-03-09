@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import AudioManager, { MUSIC } from '../audiomanager/audioManager.mjs';
+import {launchScenes} from './bootstrapLogic.mjs';
+import AudioManager, { MUSIC } from '../audiomanager/audioManager.js';
 
 const MIN_DISPLAY_TIME = 2000; // in milliseconds
 
