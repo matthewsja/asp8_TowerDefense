@@ -1,3 +1,6 @@
+// This is the Game Over page. 
+/////////////////////////////////////////////////////////////
+
 import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
 
 class OverState extends Phaser.Scene

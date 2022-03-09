@@ -1,3 +1,6 @@
+// This is the Level Selection page. 
+/////////////////////////////////////////////////////////////
+
 import AudioManager, { SFX } from '../audiomanager/audioManager.mjs';
 
 class LevelState extends Phaser.Scene

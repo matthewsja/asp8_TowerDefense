@@ -1,6 +1,6 @@
 {
 	"tower_2a":{
-		"name":"Sniper Tower 1",
+		"name":"Tiger",
 		"image":"tower2a",
 		"bulletKey":"resources.bullets[\"bullet_2\"]",
 		"range":3,

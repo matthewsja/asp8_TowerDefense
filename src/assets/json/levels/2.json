@@ -3,7 +3,7 @@
 		"selection":{
 			"name": "test2",
 			"picture": "two",
-			"description": "Test Description 2"
+			"description": "Less lives. "
 		},
 		"startParams":{
 			"lives":10,

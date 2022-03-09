@@ -18,7 +18,7 @@ import CompleteState from './states/complete.js'
 import OverState from './states/over.js'; 
 import TreasureState from './states/treasure.js'  //added by XYu Mar 5
 
-
+ 
 
 //import the play scene classes
 //these are the scenes that would be used when the game is in the play state
