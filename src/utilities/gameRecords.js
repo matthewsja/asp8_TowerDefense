@@ -19,7 +19,7 @@ class GameRecords extends Phaser.Scene
 		this.levelSelect = -1
 //this records how many waves the player has survived in the case the player has lost all their lives in the game
 		this.wavesSurvived
-//this records how many lives the player has remaing in the case the player has survived all waves
+//this records how many lives the player has remaining in the case the player has survived all waves
 		this.lives
 //this records the score the player has attained from the playthrough in case the player wins or loses
 		this.score
