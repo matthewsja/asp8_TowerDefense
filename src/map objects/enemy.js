@@ -33,7 +33,6 @@ class Enemy extends Phaser.GameObjects.PathFollower
 		self.destroy()
 	}
 
-
 }
 
 export default Enemy
