@@ -80,7 +80,7 @@ export default class AudioManager {
             instance._soundManager.stopAll();
         }
     }
-
+    
     static playMusic(musicEvent) {
         let instance = AudioManager._getInstance();
         if (instance != undefined) {

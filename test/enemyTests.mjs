@@ -4,17 +4,20 @@ import Enemy from '../src/map objects/enemy.js';
 
 // Generates a mock Enemy objecy
 function createEnemyMock() {
-  let testEnemy = {
-    context: {
-        
-    }
-  };
+  let testEnemy = {};
   sinon.stub(testEnemy.context, "resume").callsFake(() => 'mock');
   return testEnemy;
 }
 
 //Testing structure
-describe ('Enemy Tests', function() {
+describe('Enemy', function() {
+    it('Enemy should exist', function() {
+        assert.
+    });
+});
+
+/*
+describe ('Enemy', function() {
     //test object
     var testEnemy;
     
@@ -31,3 +34,4 @@ describe ('Enemy Tests', function() {
         });
     });
 });
+*/
