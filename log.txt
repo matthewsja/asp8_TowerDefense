@@ -1,3 +1,11 @@
+commit 0c03c0f527b04a1be542c03b7d3c94bbbee326e5
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Sun Mar 27 14:27:40 2022 +0100
+
+    Added the log
+    
+    Created and added the log file for r project submission
+
 commit b4d5de1b488bc4cd6eae8ca0309ba5a0a357405e
 Merge: 8dbfb17 275d6b7
 Author: matthewsja <jeremymatthews@outlook.com>
