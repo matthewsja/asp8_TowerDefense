@@ -1,0 +1,626 @@
+commit b4d5de1b488bc4cd6eae8ca0309ba5a0a357405e
+Merge: 8dbfb17 275d6b7
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Fri Mar 25 17:57:12 2022 -0300
+
+    Merge pull request #17 from matthewsja/cleanup
+    
+    Cleanup
+
+commit 275d6b73d3aecdf52dcac09021c73099fb4d4f2c
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Fri Mar 25 17:56:14 2022 -0300
+
+    Delete phaser.js
+
+commit 670a0ae188b33bfa3c2842f1d39acb727d434a15
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Fri Mar 25 17:54:50 2022 -0300
+
+    Cleanup of the project folder to remove the phaser file (we use it through Node now) and update the Readme
+
+commit 8dbfb17fad0f8386a3c1324297ef89b8bca7213f
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Thu Mar 10 17:07:45 2022 +0000
+
+    Small testing fixes
+
+commit 1fd1fc51b2d7d82ef172c2a6b76ec925cbbfd236
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Thu Mar 10 14:43:03 2022 +0000
+
+    Removed a line
+
+commit 879b526c0060ca4a63f3987c8389da9e0ab867c6
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Thu Mar 10 12:32:30 2022 +0000
+
+    Updated documentation
+
+commit 10b77a3820c63e5ae7197bb7dd4a9a2f4d337eaf
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Wed Mar 9 22:54:09 2022 +0000
+
+    Created enemyTests.mjs
+    
+    Created a rough skeleton of the enemyTests.mjs using the audioManager test as a framework. Just getting used to mocha
+
+commit 27ce7f56b9543be6360879eb862788048de22dfb
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Wed Mar 9 18:40:35 2022 +0000
+
+    Updated documentation
+
+commit d592181f7ae3995fd596c3221b2791a1d9c0a989
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Wed Mar 9 15:11:16 2022 +0000
+
+    Updated some documentation
+
+commit 754be4de08a25304b0313a1d0f5b1ba8d009583f
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Wed Mar 9 15:07:20 2022 +0000
+
+    Updated gameRecords.js
+    
+    Made a small spelling change in one of the comments
+
+commit c4cfe16477153cd29587e7446e8b842f317b71c1
+Merge: 94f5917 6060e52
+Author: Freda Xiaoyun Yu <52280636+FredaXYu@users.noreply.github.com>
+Date:   Wed Mar 9 17:52:38 2022 +0800
+
+    Merge pull request #16 from FredaXYu/main
+    
+    Added text descriptions and minor comments
+
+commit 6060e5259c319b892aa3493a5f8b9169144a2bc4
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Wed Mar 9 17:51:20 2022 +0800
+
+    Added text descriptions
+
+commit 94f5917b3f3eceed5241a4a1994376cc77f1143c
+Merge: c27ba1e 2d12298
+Author: Freda Xiaoyun Yu <52280636+FredaXYu@users.noreply.github.com>
+Date:   Tue Mar 8 14:49:16 2022 +0800
+
+    Merge pull request #15 from FredaXYu/main
+    
+    Changed map tiles
+
+commit 2d1229843d6ad80e8dd8e834f742d4e57aca957a
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Tue Mar 8 14:47:47 2022 +0800
+
+    .
+
+commit 48b830f37a8db3b04f012af4a5aa3b9fbb89db95
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Tue Mar 8 14:44:13 2022 +0800
+
+    Update picture_resources.txt
+
+commit de16e822080a0f71bb2f52a77d612dc21c6c3a53
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Tue Mar 8 14:25:15 2022 +0800
+
+    Update tileset.png
+
+commit c27ba1e6489e96bd007f4cb45493503c895e6db8
+Merge: d8d55cd f829ad4
+Author: Freda Xiaoyun Yu <52280636+FredaXYu@users.noreply.github.com>
+Date:   Mon Mar 7 11:28:18 2022 +0800
+
+    Merge pull request #14 from FredaXYu/main
+    
+    Freda changed slightly on Jeremy's latest version.
+
+commit f829ad47a7a8680084e7e3f6fb76049fb84c05f0
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Mon Mar 7 11:26:22 2022 +0800
+
+    Freda changed slightly on Jeremy's latest version.
+
+commit d8d55cd1cfd5c447a43d9961f4d65a46fd72db54
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Mar 5 20:59:00 2022 -0400
+
+    Update to copy assets cli tool for building dist
+
+commit 9385c990927f42d07dec4cb79ed543b9914d3b98
+Merge: 959d561 2d25072
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Mar 5 20:42:13 2022 -0400
+
+    Merge pull request #13 from matthewsja/happyEnd
+    
+    Adding the happy end screen
+
+commit 2d2507237f38ab37d9b457859b284115eef1c93c
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Mar 5 20:39:57 2022 -0400
+
+    Adding th happy end screen
+
+commit 959d56108418852d20003e0ce4ef03ec0e91507d
+Merge: 3328deb f5d71f2
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Mar 5 20:32:50 2022 -0400
+
+    Merge pull request #12 from FredaXYu/main
+    
+    Merge back to matthewsja repo
+
+commit f5d71f26a5837dc5798f291cbea51143dcfce3ff
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Sat Mar 5 22:13:21 2022 +0800
+
+    Treasure fixed; pictures added.
+
+commit 3328deb9547adaba8f87656b4b0f55024161efd4
+Merge: 1433ccd 32ec887
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Mar 5 01:09:26 2022 -0400
+
+    Merge pull request #11 from matthewsja/startOfTests
+    
+    Updating to begin adding tests for the games code
+
+commit 32ec887a1440156d93bd1b3de4b256901c76ceb0
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Mar 5 01:08:12 2022 -0400
+
+    Updating to begin adding tests for the games code
+
+commit a0918b05aad349507781638d19b4429e9d4a55df
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Sat Mar 5 12:20:37 2022 +0800
+
+    Added 'treasure.js' unsuccessfully -XYu.
+
+commit 1433ccd2cf2ebdee5216b183297b57a46092e139
+Merge: 113e0b6 191adfd
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Thu Mar 3 23:14:29 2022 -0400
+
+    Merge pull request #10 from matthewsja/addingBuildOptions
+    
+    Adding build production NPM options
+
+commit 191adfd7d91c32cd1de31d293fb32c43feb543f0
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Thu Mar 3 23:13:58 2022 -0400
+
+    Adding build production NPM options
+
+commit 113e0b6d95369833be796ed1f5ec91b47cf0276b
+Author: Dimitri Vlachos <86776716+dimitrivlachos@users.noreply.github.com>
+Date:   Fri Mar 4 01:32:49 2022 +0000
+
+    Create ASP8 Tower Defence Documentation.docx
+    
+    Added the start of the documentation file to the main branch
+
+commit 2293316f88b82b374f7e06a31a2660fa6b797c3e
+Merge: 680e345 656c948
+Author: Freda Xiaoyun Yu <52280636+FredaXYu@users.noreply.github.com>
+Date:   Thu Mar 3 15:59:57 2022 +0800
+
+    Merge pull request #9 from FredaXYu/main
+    
+    Alex added comments; XYu changed pictures.
+
+commit 656c948d6424855721730c910b789c5d5cde6421
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Thu Mar 3 15:56:11 2022 +0800
+
+    Alex added comments; XYu changed pictures.
+
+commit 680e3456c4f69d570786a05954b4ca4901053c48
+Merge: 1a70d82 ea5840d
+Author: Freda Xiaoyun Yu <52280636+FredaXYu@users.noreply.github.com>
+Date:   Wed Mar 2 11:40:18 2022 +0800
+
+    Merge pull request #8 from FredaXYu/main
+    
+    changed pictures and music
+
+commit ea5840df57eb04262911b270d685e7ea1bb891a9
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Wed Mar 2 11:33:03 2022 +0800
+
+    Added bg pictures & icons
+
+commit f90200f009dea4a3c5ca401326f182924869fa1f
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Wed Mar 2 10:06:55 2022 +0800
+
+    Update tileset.png
+
+commit c0fa27bd9aba6d341c646459537d1f642e7e6400
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Wed Mar 2 10:05:08 2022 +0800
+
+    Update tileset.png
+
+commit 2e0a9846da30621492c559ebb4b159b81980f714
+Author: Xiaoyun Yu <shireenyu@163.com>
+Date:   Wed Mar 2 09:29:24 2022 +0800
+
+    Changed images and music.
+
+commit 1a70d824bb1036aee55563490c4299d153676dde
+Merge: 7003146 d3d5390
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Mon Feb 21 17:58:44 2022 +1300
+
+    Merge pull request #7 from matthewsja/Delete-Redundant-Files
+    
+    Delete redundant files
+
+commit d3d539052aa60595bc3e8013616e7351d542ec20
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:04:41 2022 +1300
+
+    Delete site.js
+
+commit fd916bc0a103556e2f08f3e329ac6f157aed10d0
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:04:35 2022 +1300
+
+    Delete siteC.js
+
+commit 33bfe384c599f73ce58ab29f8375fe8b4e9ae635
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:04:27 2022 +1300
+
+    Delete tower.js
+
+commit f6f966441a321657d77a2216562ea6e06faff69a
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:04:21 2022 +1300
+
+    Delete bullet.js
+
+commit f89e8649706dbae5e2f9de1c9db9855481c15d46
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:50 2022 +1300
+
+    Delete levels.json
+
+commit 7adb5802d90e4902779ff4ee0363b6209b38d3a4
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:44 2022 +1300
+
+    Delete towers.json
+
+commit 6d9446b94868b936f2d12ab52e4a9f1811cc47fe
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:38 2022 +1300
+
+    Delete enemies.json
+
+commit 1e0c7298e17645be3a58a5d26e0d18f2d58920b1
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:33 2022 +1300
+
+    Delete bullets.json
+
+commit 6e6d03042d55806b3c06c5d7e974cfbd38c5289f
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:14 2022 +1300
+
+    Delete hud.js
+
+commit 2f5f34c52eb90fad7df99b7d896c9baae329d940
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:07 2022 +1300
+
+    Delete gameStats.js
+
+commit 01161b1bf50e6328d1c3e5a067b5756dc9674544
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:03:01 2022 +1300
+
+    Delete enemy.js
+
+commit 9428dd84b7b9f72b7acefc87e9cb892421a40235
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:02:55 2022 +1300
+
+    Delete bullet.js
+
+commit 1049ac782321e5e7b954c0dfa09d085b82072731
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:02:48 2022 +1300
+
+    Delete complete.js
+
+commit a9118f9ed6017a9e48d7ac8f219cb3c6e9c5881d
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:02:41 2022 +1300
+
+    Delete hudLogic.js
+
+commit 736c97d8d098cb4478be692638b51acaa595d280
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:02:30 2022 +1300
+
+    Delete level.js
+
+commit 471a3dc3937a368fead1efe1489471860cd908ee
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:02:24 2022 +1300
+
+    Delete main.js
+
+commit bec676237ba5567c7e44ee69873ad31640728f07
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:02:18 2022 +1300
+
+    Delete map.js
+
+commit b5bf529088997fc62d828f56e6f42fde65692967
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:52 2022 +1300
+
+    Delete mapLogic.js
+
+commit be8b03602c8598705c4cd676159320b1b3ff0d08
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:45 2022 +1300
+
+    Delete menu.js
+
+commit e207818a5ca7a2d49d8fa58fcd2ddeb5795482b0
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:38 2022 +1300
+
+    Delete over.js
+
+commit 9c75dac6d641d4ed25cc781646836398cf9237a6
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:32 2022 +1300
+
+    Delete playing.js
+
+commit 3663763ea65745787ea215fbc57fbf8f3323db5d
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:26 2022 +1300
+
+    Delete resources.js
+
+commit 120715f747373aa90a92f3bce808da1dfa507549
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:19 2022 +1300
+
+    Delete site.js
+
+commit dba529d8b2795faac656caba01de872e761d1205
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:11 2022 +1300
+
+    Delete tower.js
+
+commit c4e1f3ad111f9094b1cf3a0de5e2a82c5213da1c
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:01:01 2022 +1300
+
+    Delete towerRange.js
+
+commit ff085ffd51d0cf89d6b38141a4f2e41c1ddb6263
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 20:00:17 2022 +1300
+
+    Delete src/src directory
+
+commit f1ffedd4f2da6a0e0dd650822d21beca41b23907
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 19:27:17 2022 +1300
+
+    Fix upload error
+    
+    The last two additions added a copy of the src folder to the src so the changes were not altering the program properly. This fixes it.
+
+commit 6ab7b0bcc45d682228c6de7ff7ea02587694685b
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 20 19:09:26 2022 +1300
+
+    HP bars and split JSON files
+    
+    The enemies now have HP bars which hover above the individual enemies and are the same size as the enemy in question. The JSON files are also now split into small files so each one only deals with a single tower, bullet, enemy or level this makes editing different parts of the game easier if need be.
+
+commit 953b5ce6786751cd51d8722a90954a9357d67af3
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Fri Feb 18 20:31:56 2022 +1300
+
+    AOE Towers
+    
+    The ability to make AOE towers has been added to the game. Also, all the importing of files has been moved to the preload of the resources object. This means that there are no more 'import x from y' code at the top. Instead, the names and paths of external files have been fed to a dictionary which is then processed later in the preload.
+
+commit 41b7a7026dcb69bf485f80a47f5932a7ff30de17
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Tue Feb 15 19:33:27 2022 +1300
+
+    Level select
+    
+    Able to select levels from the level select state (2). For now the levels look similar but have different starting lives and money. All the level, tower, bullet and enemy data are now in JSON files and loaded into the resources state upon loading instead of being in the code for the resources state.
+
+commit 7003146e08ec315d692b2a2cd95c179c8ca3b20d
+Merge: 9a3261f cae977b
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 13 06:32:16 2022 +1300
+
+    Merge pull request #6 from matthewsja/tiled-map
+    
+    Tiled map
+
+commit cae977be7f4ceeb98f4c110ee198babf92b65ec8
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 13 06:26:18 2022 +1300
+
+    Add files via upload
+
+commit 9a3261fbca6a4d340eba556f1ba55682435c3c82
+Merge: e2a4e20 a87b2ee
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Feb 12 11:50:26 2022 -0400
+
+    Merge pull request #5 from matthewsja/feature/AudioManager
+    
+    Feature/audio manager
+
+commit 4d5934601a52cd81ed6f121f26d1f82ab4be8cce
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Fri Feb 11 21:04:47 2022 +1300
+
+    Add files via upload
+
+commit a3e6c82852e3466002a6e6b034efa1099b6710ca
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Fri Feb 11 20:59:11 2022 +1300
+
+    Game Map is Tiles
+    
+    The background map is now made of tiles instead of images. This means that making maps is made easier. The functional parts of the game like enemies, towers and the HUD are still objects. Instead of following a path made by the developer, the enemies now follow a path made using an external library called 'easystarjs' so this needs to be installed via Node. The package.json has been updated to reflect this change.
+
+commit a87b2ee8f9be74c27a9da5b79862c5c48a54ddae
+Author: Jeremy Matthews <jeremymatthews@outlook.com>
+Date:   Sun Feb 6 18:47:17 2022 -0400
+
+    Initial commit of AudioManager
+
+commit 13fd3033d8f15c75c453cc39811076feac4c1c83
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Feb 6 20:06:06 2022 +1300
+
+    Altered HUD and enemies can spawn in waves
+    
+    The HUD has been changed to show some basic stats like damage and speed of the tower that was clicked on. Hovering the mouse over a tower that could be bought also shows the stats of that specific tower. The game can change speed so the tower fire rate, bullet speed and enemy speed can change on the fly. The game now pauses when the settings window is up. The infrastructure for enemies to spawn in waves has been set up two buttons to make waves with. The spawn rate does not dynamically change with the game speed changes yet. All the image assets have their loading moved to the resources scene so all image references implicitly point to that.
+
+commit c44b0856732493db7c1eaad4b09315ee679aa924
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Feb 3 19:08:25 2022 +1300
+
+    Added hud
+    
+    Added a hud to the game. This includes a menu that allows the player to change scene, a menu to make or remove towers and speed setting buttons. There are also two types of towers, enemies, bullets and paths. The parameters for the different objects like enemies are now stored in a resources scene class which is accessed during play.
+
+commit fb142dab44cd71bc34123bd36c2d8ad0713787a4
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Jan 30 20:10:10 2022 +1300
+
+    Building sites and refactoring
+    
+    Towers now occupy building site container objects. They can be make by clicking on the building site and removed by clicking on the cross next to the tower. The code has been refactored so the map scene object is more organised with the functions in a separate class.
+
+commit 44b60cff531cc28aa7c145371368e80412584a78
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Fri Jan 28 18:53:02 2022 +1300
+
+    Test Fix For npm start
+    
+    Some dependencies have been added to allow npm start to run the project. To get it to work, input the commands npm install and npm install phaser@3.55.2. When the dependencies have been installed, type in npm start to get the project to run.
+
+commit e2a4e20a6277400b71881f977c4a73771862b6fa
+Merge: 40fb23e 00bbda9
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 27 22:04:15 2022 +1300
+
+    Merge pull request #4 from matthewsja/Alex-Test-Branch-1
+    
+    Towers that detect enemies
+
+commit 00bbda958b5dad6be4bb726009210508b1069d45
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 27 22:02:50 2022 +1300
+
+    Towers that detect enemies
+    
+    Created towers that spawn at random locations that can detect if an enemy is within its detection range. When an enemy is detected, the enemy despawns and a bullet spawns at the location of the tower.
+
+commit 40fb23ea0eafda3ea891d1c84154ad02a0565323
+Merge: 2166ce5 f3daaf5
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 27 22:00:36 2022 +1300
+
+    Merge pull request #3 from matthewsja/revert-2-Alex-Test-Branch
+    
+    Revert "Towers that detect enemies"
+
+commit f3daaf59ea9c033d16282cace078889208cf9da4
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 27 22:00:16 2022 +1300
+
+    Revert "Towers that detect enemies"
+
+commit 2166ce58956b8b0356af0f1c30937705e1c16d2a
+Merge: 9bd6514 0f02128
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 27 21:55:35 2022 +1300
+
+    Merge pull request #2 from matthewsja/Alex-Test-Branch
+    
+    Towers that detect enemies
+
+commit 0f02128cfe3da350c575b67b26de559693ae13fd
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 27 21:52:19 2022 +1300
+
+    Towers that detect enemies
+    
+    Made towers that spawn at random locations (the spawning mechanism uses random number generators for the x and y components). When an enemy is within its radius, the enemy will be destroyed and a bullet appears where the tower is. When a tower is clicked on, a circle will appear showing the detection radius.
+    
+    On state 3, click on 8 to spawn a tower. There is no limit to the spawn amount. Then click on 7 to spawn a path and click 6 to spawn enemies. If there are any towers with a detection radius that overlaps the path, the enemy shall despawn and a bullet shall appear at the location of the tower.
+    
+    There are no comments, the code is a bit messy and there is a bit of redundant code due to the lack of time but it should work as intended.
+    
+    Future plans are to make the bullets move to the enemies and hit them.
+
+commit 9bd65144beab8a580223354a5d4d68889952e580
+Merge: cb79f4b 2bb9d39
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Jan 23 19:56:29 2022 +1300
+
+    Merge pull request #1 from Dunnyhf/Test-Branch-Alex
+    
+    Test branch alex
+
+commit 2bb9d3972f19f02528f3be3fc959550bf3dc78f7
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Sun Jan 23 19:54:37 2022 +1300
+
+    Made enemies that follow a path
+    
+    Three things have been done:
+    1) The different scenes could be accessed from any other scene through buttons
+    2) A path system has been made such that enemies could travel on it
+    3) Enemies have been made. Both these and the destination tile have been turned into physics objects so they could interact with each other. When they touch, the enemy is removed from the list of enemies.
+    Being physics object, they could also be interacted with by bullets that would be made later in the development process.
+
+commit 327dfe2d699e1543bfcf27749946dabbaf60948f
+Author: Dunnyhf <94079052+Dunnyhf@users.noreply.github.com>
+Date:   Thu Jan 20 14:15:09 2022 +1300
+
+    Basic program with states aka scenes
+    
+    Added some state changing functionality. States are called 'scenes' in Phaser 3. The basic scenes are as described in the requirements I made over a month ago have been made. The only functionality is clicking on the game screen changes scenes. Some filler images have been made for the background to distinguish between scenes. Other images have been added to the assets folder which were recycled from older projects.
+
+commit cb79f4b79c06e0ba8281cd2c5b9ee45c97260dfe
+Author: matthewsja <jeremy.matthews@otherocean.com>
+Date:   Sun Jan 16 23:20:50 2022 -0400
+
+    Adding NodeJS, Mocha and launch.json for VSCoded
+
+commit f093f18189108f03970d2509964af08b693389ec
+Author: matthewsja <jeremy.matthews@otherocean.com>
+Date:   Sat Jan 15 23:40:24 2022 -0400
+
+    Initial project setup for Phaser
+
+commit fa943d3c383b93de517161ed269a85a90fbc55ab
+Author: matthewsja <jeremymatthews@outlook.com>
+Date:   Sat Jan 15 21:06:17 2022 -0400
+
+    Initial commit
