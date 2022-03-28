@@ -1,6 +1,25 @@
 # asp8_TowerDefense
 A Tower Defense game for Agile Software Programming Group 8
 
+--------------------------------------------------
+# For Teachers - 
+
+<b>Game link: https://aspgrp8.z1.web.core.windows.net/ </b>
+<b>Peripheral files can be found here: https://github.com/FredaXYu/ASP_Group8 </b>
+<b>Final proposal (please find the latest version): https://github.com/FredaXYu/ASP_Group8/tree/main/after_midterm/finalterm_proposal </b>
+
+--------------------------------------------------
+
+### Members:
+Alex Chu
+Dimitri Vlachos
+Jeremy Matthews
+Freda Xiaoyun Yu
+(Absent: Sharif Khan)
+
+--------------------------------------------------
+
+# For Developers - 
 ## Developer Setup
 
 Because of the nature of Phaser, and writing games with JavaScript, the game will need a web server to be able to be tested during development.  There are a few tools that can be used to help streamline this process.  Brackets and Visual Studio Code both have the ability to run a local web server for easy testing of the game.  This project can also make use of NodeJS to run a small local web server.
