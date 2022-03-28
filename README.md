@@ -5,16 +5,22 @@ A Tower Defense game for Agile Software Programming Group 8
 # For Teachers - 
 
 <b>Game link: https://aspgrp8.z1.web.core.windows.net/ </b>
+
 <b>Peripheral files can be found here: https://github.com/FredaXYu/ASP_Group8 </b>
+
 <b>Final proposal (please find the latest version): https://github.com/FredaXYu/ASP_Group8/tree/main/after_midterm/finalterm_proposal </b>
 
 --------------------------------------------------
 
 ### Members:
 Alex Chu
+
 Dimitri Vlachos
+
 Jeremy Matthews
+
 Freda Xiaoyun Yu
+
 (Absent: Sharif Khan)
 
 --------------------------------------------------
